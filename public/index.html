@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peak Hair Restoration Clinic | Sapphire FUE, PRP & Stem Cell — Istanbul, New York, Miami</title>
+<meta name="description" content="Premium hair restoration. Sapphire FUE, PRP packages, and Stem Cell treatments with expert care in Istanbul, New York & Miami.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://videos.pexels.com">
+<link rel="preconnect" href="https://images.pexels.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PEAK HAIR RESTORATION — DESIGN SYSTEM
+   · warm paper-cream canvas, deep forest green ink
+   · soft-serif display type w/ italic accents + neutral sans
+   · pill buttons, generously rounded sections, airy spacing
+   Fonts: Fraunces (display serif), Inter (neutral grotesque body/UI)
+   ============================================================ */
+:root{
+  --paper:#F3EFE6;        /* page background — warm cream */
+  --paper-soft:#EAE4D6;   /* darker cream for alt sections */
+  --forest:#1E3B2E;       /* primary — deep forest green */
+  --forest-deep:#152B21;  /* darkest green */
+  --sage:#5C7263;         /* muted green secondary text */
+  --sand:#C9A25E;         /* warm sand/gold accent */
+  --sand-soft:#E4D3AE;    /* pale sand highlight */
+  --white:#FCFAF4;        /* card background */
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-pill:100px;
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--paper);color:var(--forest);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.06;letter-spacing:-0.015em;color:var(--forest)}
+h1 em,h2 em{font-style:italic;font-weight:400}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--sage);margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:var(--radius-pill);font-weight:600;font-size:15px;transition:all .25s ease;cursor:pointer;border:none;font-family:var(--font-body)}
+.btn-forest{background:var(--forest);color:var(--paper)}
+.btn-forest:hover{background:var(--forest-deep);transform:translateY(-2px)}
+.btn-cream{background:var(--paper);color:var(--forest)}
+.btn-cream:hover{background:#fff;transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--forest);border:1.5px solid var(--forest)}
+.btn-outline:hover{background:var(--forest);color:var(--paper)}
+.btn-outline-light{background:transparent;color:var(--paper);border:1.5px solid rgba(243,239,230,.65)}
+.btn-outline-light:hover{background:var(--paper);color:var(--forest)}
+
+/* Announcement */
+.announce{background:var(--forest-deep);color:var(--paper);text-align:center;font-size:13px;padding:9px 16px;letter-spacing:.02em}
+.announce a{text-decoration:underline;color:var(--sand)}
+
+/* Nav */
+header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(30,59,46,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{display:inline-block}
+.logo img{height:46px;width:auto}
+.nav-links{display:flex;gap:32px;font-size:15px;font-weight:500}
+.nav-links a{opacity:.85;transition:all .2s}
+.nav-links a:hover{opacity:1;color:var(--sage)}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.nav-cta .btn{padding:11px 22px;font-size:14px}
+.menu-btn{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--forest)}
+
+/* ============ FULL-BLEED VIDEO HERO ============ */
+.hero{padding:16px}
+.hero-frame{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:88vh;display:flex;align-items:flex-end}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,43,33,.18) 0%,rgba(21,43,33,.28) 45%,rgba(21,43,33,.84) 100%)}
+.hero-content{position:relative;width:100%;max-width:1200px;margin:0 auto;padding:0 40px 64px;color:var(--paper)}
+.hero-content .eyebrow{color:var(--sand-soft)}
+.hero-content h1{font-size:clamp(46px,6.5vw,84px);color:var(--paper);max-width:14ch}
+.hero-content h1 em{color:var(--sand-soft)}
+.hero-sub{font-size:18px;color:rgba(243,239,230,.85);margin:20px 0 30px;max-width:520px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(243,239,230,.14);border:1px solid rgba(243,239,230,.25);backdrop-filter:blur(8px);border-radius:var(--radius-pill);padding:8px 18px;font-size:13px;margin-bottom:22px}
+.hero-badge b{color:var(--sand-soft)}
+.hero-meta{margin-top:26px;display:flex;gap:28px;flex-wrap:wrap;font-size:13px;color:rgba(243,239,230,.75)}
+.hero-meta b{display:block;font-family:var(--font-display);font-size:22px;color:var(--paper);line-height:1.2}
+
+/* Marquee */
+.marquee{border-top:1px solid rgba(30,59,46,.1);border-bottom:1px solid rgba(30,59,46,.1);padding:16px 0;overflow:hidden;background:var(--paper-soft)}
+.marquee-track{display:flex;gap:48px;white-space:nowrap;animation:scroll 32s linear infinite;width:max-content}
+.marquee-track span{font-family:var(--font-display);font-size:17px;color:var(--sage);display:flex;align-items:center;gap:48px}
+.marquee-track span::after{content:'✦';color:var(--sand);font-size:13px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* Sections */
+.section{padding:100px 0}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.intro h2{font-size:clamp(34px,4vw,54px);margin-bottom:20px}
+.intro p{color:var(--sage);font-size:17px;max-width:480px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.stat{background:var(--white);border-radius:var(--radius);padding:28px 26px;border:1px solid rgba(30,59,46,.07)}
+.stat strong{font-family:var(--font-display);font-size:40px;display:block;color:var(--forest);line-height:1.1}
+.stat em{font-style:normal;font-size:14px;color:var(--sage)}
+
+/* Treatments (dark) */
+.dark-section{background:var(--forest-deep);color:var(--paper);border-radius:36px;margin:0 16px}
+.dark-section .eyebrow{color:var(--sand)}
+.dark-section h2{color:var(--paper);font-size:clamp(34px,4vw,54px)}
+.treat-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.treat-head p{color:rgba(243,239,230,.72);max-width:420px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:rgba(243,239,230,.06);border:1px solid rgba(243,239,230,.14);border-radius:24px;padding:34px 30px;display:flex;flex-direction:column;transition:transform .3s ease,background .3s ease}
+.card:hover{transform:translateY(-6px);background:rgba(243,239,230,.1)}
+.card .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);font-weight:600;margin-bottom:14px}
+.card h3{font-size:28px;color:var(--paper);margin-bottom:12px}
+.card p{font-size:15px;color:rgba(243,239,230,.72);margin-bottom:20px}
+.card ul{list-style:none;margin-bottom:28px;flex:1}
+.card li{font-size:14px;padding:9px 0;border-bottom:1px solid rgba(243,239,230,.12);color:rgba(243,239,230,.9)}
+.card li::before{content:'✓  ';color:var(--sand)}
+.card .btn{align-self:flex-start}
+.card.featured{background:var(--sand);border-color:var(--sand)}
+.card.featured .tag{color:var(--forest-deep)}
+.card.featured h3{color:var(--forest-deep)}
+.card.featured p,.card.featured li{color:rgba(21,43,33,.82)}
+.card.featured li{border-color:rgba(21,43,33,.16)}
+.card.featured li::before{color:var(--forest-deep)}
+
+/* ============ BEFORE / AFTER COMPARISON ============ */
+.results-head{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:20px;margin-bottom:44px}
+.results-head h2{font-size:clamp(34px,4vw,54px)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{border:1.5px solid rgba(30,59,46,.25);background:transparent;border-radius:var(--radius-pill);padding:8px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-body);color:var(--forest);transition:all .2s}
+.filters button.active,.filters button:hover{background:var(--forest);color:var(--paper);border-color:var(--forest)}
+.sample-note{margin-top:18px;font-size:12px;color:var(--sage);text-align:right}
+
+/* ---- Guided by Doctors (video feature) ---- */
+.doctors{padding:0 16px}
+.doc-frame{position:relative;border-radius:36px;overflow:hidden;min-height:640px;display:flex;align-items:flex-end;background:var(--forest-deep)}
+.doc-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.doc-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,43,33,.22) 0%,rgba(21,43,33,.42) 50%,rgba(21,43,33,.9) 100%)}
+.doc-content{position:relative;padding:56px;max-width:720px;color:var(--paper)}
+.doc-content .eyebrow{color:var(--sand)}
+.doc-content h2{color:var(--paper);font-size:clamp(38px,5vw,66px);margin-bottom:18px}
+.doc-content h2 em{color:var(--sand-soft)}
+.doc-content p{color:rgba(243,239,230,.84);font-size:17px;margin-bottom:28px;max-width:560px}
+.doc-credentials{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;font-size:13px;color:rgba(243,239,230,.72)}
+.doc-credentials b{display:block;font-family:var(--font-display);font-size:20px;color:var(--paper);line-height:1.2}
+.doc-sound{position:absolute;top:24px;right:24px;z-index:2;display:inline-flex;align-items:center;gap:8px;background:rgba(243,239,230,.16);border:1px solid rgba(243,239,230,.3);backdrop-filter:blur(8px);color:var(--paper);border-radius:var(--radius-pill);padding:10px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all .2s}
+.doc-sound:hover{background:var(--paper);color:var(--forest)}
+
+/* ---- Before/After carousel (compact cards) ---- */
+.carousel-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:0 0 22px}
+.carousel-head h3{font-size:clamp(22px,2.4vw,30px)}
+.car-nav{display:flex;gap:8px}
+.car-nav button{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(30,59,46,.25);background:transparent;cursor:pointer;color:var(--forest);font-size:15px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.car-nav button:hover{background:var(--forest);color:var(--paper);border-color:var(--forest)}
+.carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:8px;scrollbar-width:none;-ms-overflow-style:none}
+.carousel::-webkit-scrollbar{display:none}
+.ba-card{flex:0 0 268px;scroll-snap-align:start;background:var(--white);border-radius:16px;overflow:hidden;border:1px solid rgba(30,59,46,.08);transition:transform .25s ease}
+.ba-card:hover{transform:translateY(-4px)}
+.ba-card .pair{position:relative;line-height:0}
+.ba-card .pair img{width:100%;height:auto;display:block}
+.ba-card .pair span{position:absolute;bottom:10px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(21,43,33,.65);padding:3px 9px;border-radius:var(--radius-pill);white-space:nowrap;backdrop-filter:blur(4px)}
+.ba-card .pair .l-b{left:10px}
+.ba-card .pair .l-a{right:10px}
+.ba-card .cap{padding:11px 13px;font-size:12px;color:var(--sage);display:flex;justify-content:center;gap:8px;align-items:center;letter-spacing:.04em}
+.ba-card .cap b{color:var(--forest);font-weight:600}
+
+/* Steps */
+.steps-wrap{background:var(--paper-soft);border-radius:36px;margin:0 16px}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
+.step{background:var(--white);border-radius:22px;padding:32px 26px;border:1px solid rgba(30,59,46,.07)}
+.step .num{font-family:var(--font-display);font-size:44px;color:var(--sand);line-height:1;margin-bottom:16px}
+.step h3{font-size:20px;margin-bottom:10px}
+.step p{font-size:14px;color:var(--sage)}
+
+/* Locations */
+.loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+.loc{border-radius:24px;overflow:hidden;position:relative;aspect-ratio:4/4.8;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;color:var(--paper)}
+.loc::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,26,20,.15) 20%,rgba(15,26,20,.88));z-index:1}
+.loc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.loc:hover .loc-img{transform:scale(1.06)}
+.loc>*:not(.loc-img){position:relative;z-index:2}
+.loc h3{font-size:30px;color:var(--paper);margin-bottom:6px}
+.loc p{font-size:14px;color:rgba(243,239,230,.8);margin-bottom:16px}
+.loc .btn{padding:10px 20px;font-size:13px}
+
+/* Testimonials */
+.quote-grid{columns:3;column-gap:20px;margin-top:52px}
+.quote{background:var(--white);border-radius:20px;padding:28px 26px;margin-bottom:20px;break-inside:avoid;border:1px solid rgba(30,59,46,.08)}
+.stars{color:var(--sand);letter-spacing:2px;font-size:15px}
+.quote .stars{margin-bottom:12px;display:block}
+.quote p{font-size:15px;color:var(--sage);margin-bottom:16px}
+.quote b{font-size:14px;color:var(--forest)}
+.quote span{font-size:13px;color:var(--sage)}
+
+/* FAQ */
+.faq-wrap{max-width:760px;margin:52px auto 0}
+.faq{border-bottom:1px solid rgba(30,59,46,.14)}
+.faq button{width:100%;background:none;border:none;text-align:left;padding:24px 8px;font-size:18px;font-family:var(--font-display);font-weight:500;color:var(--forest);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq button::after{content:'+';font-size:26px;color:var(--sand);transition:transform .25s}
+.faq.open button::after{transform:rotate(45deg)}
+.faq .ans{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--sage);font-size:15px}
+.faq.open .ans{max-height:220px}
+.faq .ans p{padding:0 8px 24px}
+
+/* CTA */
+.cta-band{background:var(--forest);border-radius:36px;margin:0 16px;text-align:center;color:var(--paper);padding:90px 24px}
+.cta-band h2{font-size:clamp(36px,5vw,60px);color:var(--paper);max-width:700px;margin:0 auto 18px}
+.cta-band h2 em{color:var(--sand-soft)}
+.cta-band p{color:rgba(243,239,230,.78);margin-bottom:34px;font-size:17px}
+.cta-band .hero-ctas{justify-content:center}
+
+/* Footer */
+footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.foot-grid .logo img{height:56px;margin-bottom:4px}
+.foot-grid h4{font-family:var(--font-display);font-size:17px;color:var(--forest);margin-bottom:14px}
+.foot-grid a{display:block;padding:5px 0;transition:color .2s}
+.foot-grid a:hover{color:var(--forest)}
+.foot-bottom{border-top:1px solid rgba(30,59,46,.12);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px}
+
+/* Responsive */
+@media(max-width:960px){
+  .intro-grid{grid-template-columns:1fr}
+  .cards,.loc-grid,.steps-grid{grid-template-columns:1fr 1fr}
+  .quote-grid{columns:2}
+  .nav-links{display:none}
+  .menu-btn{display:block}
+  .nav-cta .btn-outline{display:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .hero-frame{min-height:78vh}
+  .hero-content{padding:0 28px 48px}
+  .doc-frame{min-height:520px}
+  .doc-content{padding:36px 28px}
+}
+@media(max-width:600px){
+  .cards,.loc-grid,.steps-grid{grid-template-columns:1fr}
+  .quote-grid{columns:1}
+  .section{padding:64px 0}
+  .hero{padding:10px}
+  .hero-content{padding:0 20px 36px}
+  .logo img{height:36px}
+  .foot-grid .logo img{height:46px}
+  .doctors{padding:0 10px}
+  .doc-frame{min-height:480px;border-radius:24px}
+  .doc-content{padding:28px 20px}
+  .doc-credentials{gap:18px}
+  .doc-sound{top:16px;right:16px;padding:8px 14px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">Free, no-obligation consultation — online or in clinic. <a href="#contact">Book yours today</a></div>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#" aria-label="Peak Hair Restoration Clinic"><img src="assets/peak-logo-2x.png" alt="Peak Hair Restoration Clinic"></a>
+    <nav class="nav-links">
+      <a href="#treatments">Treatments</a>
+      <a href="#results">Results</a>
+      <a href="#process">How It Works</a>
+      <a href="#locations">Locations</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-outline">Free Consult</a>
+      <a href="#contact" class="btn btn-forest">Book a Visit</a>
+    </div>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-frame">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+      poster="assets/peak-hero-poster.jpg">
+      <source src="assets/peak-hero-web.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">★★★★★ &nbsp;<b>5.0</b> on Google · 60 reviews</div>
+      <h1>Reach the <em>peak</em> of natural hair restoration</h1>
+      <p class="hero-sub">Sapphire FUE, PRP packages and Stem Cell treatments, delivered by expert medical teams in Istanbul, New York and Miami.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-cream">Book a Free Consultation</a>
+        <a href="#treatments" class="btn btn-outline-light">Explore Treatments</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>5,000+</b>Procedures performed*</div>
+        <div><b>3</b>Clinic locations</div>
+        <div><b>12 mo</b>Aftercare programme</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Sapphire FUE</span><span>PRP Packages</span><span>Stem Cell Therapy</span><span>Natural Hairline Design</span><span>Beard & Eyebrow Restoration</span><span>Lifetime Aftercare</span>
+    <span>Sapphire FUE</span><span>PRP Packages</span><span>Stem Cell Therapy</span><span>Natural Hairline Design</span><span>Beard & Eyebrow Restoration</span><span>Lifetime Aftercare</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container intro-grid">
+    <div class="intro">
+      <div class="eyebrow">Why Peak</div>
+      <h2>Precision surgery. <em>Natural</em> results. Honest guidance.</h2>
+      <p>Every case begins with a medical assessment — not a sales pitch. Our surgeons design your hairline around your face, age and donor capacity, so results look like they were always yours.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>5,000+</strong><em>Successful procedures*</em></div>
+      <div class="stat"><strong>15+ yrs</strong><em>Surgical team experience*</em></div>
+      <div class="stat"><strong>5.0 ★</strong><em>Google rating · 60 reviews</em></div>
+      <div class="stat"><strong>12 mo</strong><em>Dedicated aftercare programme</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-section section" id="treatments">
+  <div class="container">
+    <div class="treat-head">
+      <div>
+        <div class="eyebrow">Treatments</div>
+        <h2>Three proven paths to <em>fuller</em> hair</h2>
+      </div>
+      <p>From advanced surgical techniques to regenerative therapy — your consultation determines which approach fits your hair loss stage and goals.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="tag">Most Popular</div>
+        <h3>Sapphire FUE</h3>
+        <p>Follicular extraction using sapphire-blade incisions for denser packing and faster healing.</p>
+        <ul>
+          <li>Minimal scarring, quick recovery</li>
+          <li>High-density natural coverage</li>
+          <li>Single-session solutions available</li>
+        </ul>
+        <a href="#contact" class="btn btn-cream">Learn About Sapphire FUE</a>
+      </div>
+      <div class="card featured">
+        <div class="tag">Non-Surgical</div>
+        <h3>PRP Package</h3>
+        <p>Platelet-rich plasma drawn from your own blood, injected to strengthen thinning follicles and support growth.</p>
+        <ul>
+          <li>Multi-session treatment packages</li>
+          <li>No surgery, no downtime</li>
+          <li>Boosts density after a transplant</li>
+        </ul>
+        <a href="#contact" class="btn btn-forest">Learn About PRP</a>
+      </div>
+      <div class="card">
+        <div class="tag">Regenerative</div>
+        <h3>Stem Cell Therapy</h3>
+        <p>Non-surgical regenerative treatment that strengthens existing follicles and supports transplant results.</p>
+        <ul>
+          <li>No downtime, no surgery</li>
+          <li>Boosts graft survival post-op</li>
+          <li>Ideal for early-stage thinning</li>
+        </ul>
+        <a href="#contact" class="btn btn-cream">Learn About Stem Cell</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="doctors section" style="padding-bottom:0">
+  <div class="doc-frame">
+    <video class="doc-video" id="docVideo" autoplay muted loop playsinline preload="metadata"
+      poster="https://images.pexels.com/videos/6235749/pexels-photo-6235749.jpeg?auto=compress&w=1400">
+      <source src="https://videos.pexels.com/video-files/6235749/6235749-hd_1920_1080_25fps.mp4" type="video/mp4">
+      <source src="https://videos.pexels.com/video-files/6235749/6235749-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="doc-overlay"></div>
+    <button class="doc-sound" id="docSound" aria-label="Toggle sound">🔇 Sound off</button>
+    <div class="doc-content">
+      <div class="eyebrow">Medical Oversight</div>
+      <h2>Guided by <em>Doctors</em></h2>
+      <p>Every hairline is designed, every graft count is set, and every treatment plan is approved by a licensed surgeon — not a sales consultant. You speak with the person who will perform your procedure.</p>
+      <a href="#contact" class="btn btn-cream">Meet Your Surgeon</a>
+      <div class="doc-credentials">
+        <div><b>Board-certified</b>Surgical team</div>
+        <div><b>15+ years</b>Transplant experience*</div>
+        <div><b>Surgeon-led</b>Every consultation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <div class="results-head">
+      <div>
+        <div class="eyebrow">Results</div>
+        <h2>Real patients. <em>Real</em> regrowth.</h2>
+      </div>
+      <div class="filters">
+        <button class="active">All</button>
+        <button>Sapphire FUE</button>
+        <button>PRP</button>
+        <button>Stem Cell</button>
+      </div>
+    </div>
+    <div class="carousel-head">
+      <h3>Browse patient results</h3>
+      <div class="car-nav">
+        <button id="carPrev" aria-label="Previous results">◂</button>
+        <button id="carNext" aria-label="Next results">▸</button>
+      </div>
+    </div>
+    <div class="carousel" id="carousel">
+      <div class="ba-card">
+        <div class="pair">
+          <img src="assets/peak-ba-1.jpg" loading="lazy" alt="Peak Hair Restoration patient before and after Sapphire FUE">
+          <span class="l-b">Before</span><span class="l-a">After</span>
+        </div>
+        <div class="cap"><b>Sapphire FUE</b></div>
+      </div>
+      <div class="ba-card">
+        <div class="pair">
+          <img src="assets/peak-ba-2.jpg" loading="lazy" alt="Peak Hair Restoration patient before and after Sapphire FUE">
+          <span class="l-b">Before</span><span class="l-a">After</span>
+        </div>
+        <div class="cap"><b>Sapphire FUE</b></div>
+      </div>
+      <div class="ba-card">
+        <div class="pair">
+          <img src="assets/peak-ba-3.jpg" loading="lazy" alt="Peak Hair Restoration patient before and after Sapphire FUE">
+          <span class="l-b">Before</span><span class="l-a">After</span>
+        </div>
+        <div class="cap"><b>Sapphire FUE</b></div>
+      </div>
+      <div class="ba-card">
+        <div class="pair">
+          <img src="assets/peak-ba-4.jpg" loading="lazy" alt="Peak Hair Restoration patient before and after Sapphire FUE">
+          <span class="l-b">Before</span><span class="l-a">After</span>
+        </div>
+        <div class="cap"><b>Sapphire FUE</b></div>
+      </div>
+      <div class="ba-card">
+        <div class="pair">
+          <img src="assets/peak-ba-5.jpg" loading="lazy" alt="Peak Hair Restoration patient before and after Sapphire FUE">
+          <span class="l-b">Before</span><span class="l-a">After</span>
+        </div>
+        <div class="cap"><b>Sapphire FUE</b></div>
+      </div>
+    </div>
+    <div class="sample-note">Scroll or use the arrows to browse more results</div>
+  </div>
+</section>
+
+<section class="steps-wrap section" id="process">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto">
+      <div class="eyebrow">How It Works</div>
+      <h2 style="font-size:clamp(34px,4vw,54px)">From first call to <em>full</em> growth</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step"><div class="num">1</div><h3>Free Consultation</h3><p>Share photos or visit a clinic. Our medical team assesses your hair loss pattern, donor area and expectations — honestly.</p></div>
+      <div class="step"><div class="num">2</div><h3>Personal Plan & Hairline Design</h3><p>Your surgeon designs a hairline suited to your face and age, and recommends the right technique and graft count.</p></div>
+      <div class="step"><div class="num">3</div><h3>Procedure Day</h3><p>A comfortable, single-day procedure under local anaesthesia, performed by an experienced surgical team.</p></div>
+      <div class="step"><div class="num">4</div><h3>Aftercare & Growth</h3><p>Structured 12-month follow-up with check-ins at every milestone. Visible density from month 6, full results by month 12–14.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="locations">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto">
+      <div class="eyebrow">Locations</div>
+      <h2 style="font-size:clamp(34px,4vw,54px)">Three cities. One standard of <em>care</em>.</h2>
+    </div>
+    <div class="loc-grid">
+      <div class="loc">
+        <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/28764621/pexels-photo-28764621.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Istanbul skyline with the Galata Tower">
+        <h3>Istanbul</h3><p>Our flagship surgical centre — all-inclusive packages with hotel & transfers.</p><a href="#contact" class="btn btn-cream">Plan Your Visit</a>
+      </div>
+      <div class="loc">
+        <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/18388935/pexels-photo-18388935.jpeg?auto=compress&cs=tinysrgb&w=900" alt="New York City skyline">
+        <h3>New York</h3><p>Consultations, PRP and stem cell therapy, and post-op care in Manhattan.</p><a href="#contact" class="btn btn-cream">Plan Your Visit</a>
+      </div>
+      <div class="loc">
+        <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/34650327/pexels-photo-34650327.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Miami skyline and waterfront">
+        <h3>Miami</h3><p>Consultations, PRP packages and aftercare, with direct referral to our surgical team.</p><a href="#contact" class="btn btn-cream">Plan Your Visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto">
+      <div class="eyebrow">Testimonials</div>
+      <h2 style="font-size:clamp(34px,4vw,54px)">Rated <em>5.0</em> on Google</h2>
+      <p style="color:var(--sage);margin-top:14px">Every review below is a verified Google review of our New York clinic.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote"><span class="stars">★★★★★</span><p>“Peak Hair Transplant really got me my hair back, basically. I'm very happy with the results — everyone around me loves it. I've had to tell some people I've gotten a transplant and they would've never known!”</p><b>Luan Kazani</b> <span>· Google review · 2 months ago</span></div>
+      <div class="quote"><span class="stars">★★★★★</span><p>“The entire team was professional, friendly, and made me feel comfortable throughout my hair transplant journey… I recently completed my first PRP treatment, and the experience was just as smooth and professional. I really appreciate how they continue to follow up with me and support my recovery.”</p><b>Ramone Thomas</b> <span>· Google review · 2 months ago</span></div>
+      <div class="quote"><span class="stars">★★★★★</span><p>“My husband had his hair transplant yesterday and our entire experience was outstanding from beginning to end. The consultation, surgery, and hospitality were all excellent… The clinic itself is very high-end, modern, and extremely clean.”</p><b>SeMakeup</b> <span>· Google review · 6 months ago</span></div>
+      <div class="quote"><span class="stars">★★★★★</span><p>“The team really listened to what I wanted and designed the hairline I had always dreamed of. What impressed me the most was how natural everything looks — they paid attention to every detail to make sure the result fit my face perfectly.”</p><b>Gustavo Oak</b> <span>· Google review · 5 months ago</span></div>
+      <div class="quote"><span class="stars">★★★★★</span><p>“After researching many clinics, I'm really happy I chose Peak Hair Transplant. The team is very professional and the whole experience felt smooth and well organized… focused on natural-looking results.”</p><b>Efe Çağatay ERCAN</b> <span>· Google review · 6 months ago</span></div>
+      <div class="quote"><span class="stars">★★★★★</span><p>“Ben was the first person I spoke to and made everything super easy to understand. He broke down the pricing, what to expect, and didn't try to pressure me into anything, which I appreciated… The clinic itself is clean and organized, and communication before and after was on point.”</p><b>junayed sm</b> <span>· Google review · 4 months ago</span></div>
+      <div class="quote"><span class="stars">★★★★★</span><p>“From the initial consultation to the procedure and follow-up care, the entire team was professional, knowledgeable, and supportive… I'm already seeing great results, and my confidence has improved tremendously.”</p><b>Moon Boy</b> <span>· Google review · 2 months ago</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top:0">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto">
+      <div class="eyebrow">FAQ</div>
+      <h2 style="font-size:clamp(34px,4vw,54px)">Questions, <em>answered</em></h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq"><button>Am I a good candidate for a hair transplant?</button><div class="ans"><p>Most people with stable donor hair are candidates, but the honest answer requires an assessment. Our free consultation reviews your hair loss stage, donor capacity and health history before any recommendation is made.</p></div></div>
+      <div class="faq"><button>What's the difference between Sapphire FUE and PRP?</button><div class="ans"><p>Sapphire FUE is a surgical transplant — grafts are moved from your donor area to thinning zones using sapphire-blade micro-incisions. PRP is non-surgical: platelet-rich plasma from your own blood is injected to strengthen follicles you still have. Many patients combine both, using PRP to support transplant results.</p></div></div>
+      <div class="faq"><button>How long until I see results?</button><div class="ans"><p>New growth typically begins around month 3–4, visible density arrives by month 6–8, and final results settle between months 12 and 14.</p></div></div>
+      <div class="faq"><button>Is the procedure painful?</button><div class="ans"><p>Procedures are performed under local anaesthesia. Most patients describe mild discomfort only during the initial numbing, and return to normal routines within days.</p></div></div>
+      <div class="faq"><button>What do Istanbul packages include?</button><div class="ans"><p>All-inclusive packages cover the procedure, hotel accommodation, VIP airport transfers, medication and aftercare kit, plus a 12-month follow-up programme. Details are confirmed in your consultation.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="eyebrow" style="color:var(--sand)">Start Today</div>
+  <h2>Your restoration journey starts with <em>one conversation</em></h2>
+  <p>Free consultation. Honest assessment. No obligation.</p>
+  <div class="hero-ctas">
+    <a href="mailto:info@peakhairtransplant.com" class="btn btn-cream">Book a Free Consultation</a>
+    <a href="https://wa.me/0000000000" class="btn btn-outline-light">WhatsApp Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#" aria-label="Peak Hair Restoration Clinic"><img src="assets/peak-logo-2x.png" alt="Peak Hair Restoration Clinic"></a>
+        <p style="margin-top:14px;max-width:280px">Premium hair restoration with Sapphire FUE, PRP packages and Stem Cell treatments — Istanbul, New York & Miami.</p>
+      </div>
+      <div><h4>Treatments</h4><a href="#treatments">Sapphire FUE</a><a href="#treatments">PRP Packages</a><a href="#treatments">Stem Cell Therapy</a></div>
+      <div><h4>Clinic</h4><a href="#results">Results</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#faq">FAQ</a></div>
+      <div><h4>Contact</h4><a href="mailto:info@peakhairtransplant.com">info@peakhairtransplant.com</a><a href="#contact">Book a Consultation</a><a href="#contact">WhatsApp</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Peak Hair Restoration Clinic. All rights reserved.</span>
+      <span>*Verify remaining statistics before publishing. Reviews sourced from Google, September 2026.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq').forEach(f=>f.classList.remove('open'));
+    if(!open)item.classList.add('open');
+  });
+});
+// Result filter pills (visual only in mockup)
+document.querySelectorAll('.filters button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+// Guided by Doctors — sound toggle + play only while in view
+(function(){
+  const v=document.getElementById('docVideo'), btn=document.getElementById('docSound');
+  if(!v||!btn)return;
+  btn.addEventListener('click',()=>{
+    v.muted=!v.muted;
+    btn.textContent=v.muted?'🔇 Sound off':'🔊 Sound on';
+    if(!v.muted)v.play();
+  });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>es.forEach(e=>{
+      e.isIntersecting?v.play().catch(()=>{}):v.pause();
+    }),{threshold:.25}).observe(v);
+  }
+})();
+// Before/After carousel arrows
+(function(){
+  const c=document.getElementById('carousel');
+  if(!c)return;
+  const step=()=>{const card=c.querySelector('.ba-card');return card?card.offsetWidth+14:250};
+  document.getElementById('carNext').addEventListener('click',()=>c.scrollBy({left:step()*2,behavior:'smooth'}));
+  document.getElementById('carPrev').addEventListener('click',()=>c.scrollBy({left:-step()*2,behavior:'smooth'}));
+})();
+// Ensure hero video autoplays on mobile (some browsers need a nudge)
+(function(){
+  const v=document.querySelector('.hero-video');
+  if(!v)return;
+  v.play().catch(()=>{document.addEventListener('touchstart',()=>v.play(),{once:true})});
+})();
+</script>
+</body>
+</html>
