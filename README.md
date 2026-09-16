@@ -81,7 +81,6 @@ doctor video with real footage of the clinics and surgical team.
 
 ## Placeholders to fill in
 
-- `https://wa.me/0000000000` — WhatsApp number (currently a dummy)
 - `info@peakhairtransplant.com` — confirm this is the right inbox
 - Stats marked with `*`: "5,000+ procedures", "15+ yrs experience",
   "Board-certified", "12-month aftercare". The **5.0 ★ / 60 Google reviews**
