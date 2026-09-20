@@ -214,9 +214,11 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .consult-form{max-width:560px;margin:0 auto;text-align:left}
 .form-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
 .form-row>*{flex:1 1 220px}
-.consult-form input,.consult-form textarea{width:100%;background:rgba(243,239,230,.08);border:1.5px solid rgba(243,239,230,.25);border-radius:14px;padding:14px 18px;font-family:var(--font-body);font-size:15px;color:var(--paper)}
+.consult-form input,.consult-form select,.consult-form textarea{width:100%;background:rgba(243,239,230,.08);border:1.5px solid rgba(243,239,230,.25);border-radius:14px;padding:14px 18px;font-family:var(--font-body);font-size:15px;color:var(--paper)}
+.consult-form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23E4D3AE' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.consult-form select option{color:var(--forest)}
 .consult-form input::placeholder,.consult-form textarea::placeholder{color:rgba(243,239,230,.55)}
-.consult-form input:focus,.consult-form textarea:focus{outline:none;border-color:var(--sand)}
+.consult-form input:focus,.consult-form select:focus,.consult-form textarea:focus{outline:none;border-color:var(--sand)}
 .consult-form textarea{margin-bottom:20px;resize:vertical;min-height:88px}
 .form-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .form-actions .btn[disabled]{opacity:.6;cursor:default;transform:none}
@@ -548,6 +550,12 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
     </div>
     <div class="form-row">
       <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" required>
+      <select name="location" required>
+        <option value="" disabled selected>Preferred location</option>
+        <option value="istanbul">Istanbul</option>
+        <option value="newyork">New York</option>
+        <option value="miami">Miami</option>
+      </select>
     </div>
     <textarea name="message" placeholder="Tell us a bit about your hair loss and goals" rows="3"></textarea>
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
