@@ -210,6 +210,20 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .cta-band p{color:rgba(243,239,230,.78);margin-bottom:34px;font-size:17px}
 .cta-band .hero-ctas{justify-content:center}
 
+/* Consultation form */
+.consult-form{max-width:560px;margin:0 auto;text-align:left}
+.form-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.form-row>*{flex:1 1 220px}
+.consult-form input,.consult-form textarea{width:100%;background:rgba(243,239,230,.08);border:1.5px solid rgba(243,239,230,.25);border-radius:14px;padding:14px 18px;font-family:var(--font-body);font-size:15px;color:var(--paper)}
+.consult-form input::placeholder,.consult-form textarea::placeholder{color:rgba(243,239,230,.55)}
+.consult-form input:focus,.consult-form textarea:focus{outline:none;border-color:var(--sand)}
+.consult-form textarea{margin-bottom:20px;resize:vertical;min-height:88px}
+.form-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.form-actions .btn[disabled]{opacity:.6;cursor:default;transform:none}
+.form-note{margin-top:16px;font-size:14px;text-align:center;min-height:1.2em}
+.form-note.success{color:var(--sand-soft)}
+.form-note.error{color:#E8A6A6}
+
 /* Footer */
 footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
@@ -527,10 +541,23 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
   <div class="eyebrow" style="color:var(--sand)">Start Today</div>
   <h2>Your restoration journey starts with <em>one conversation</em></h2>
   <p>Free consultation. Honest assessment. No obligation.</p>
-  <div class="hero-ctas">
-    <a href="https://calendly.com/peakhairrestorationbookings" target="_blank" rel="noopener" class="btn btn-cream">Book a Free Consultation</a>
-    <a href="https://wa.me/19172663038" target="_blank" rel="noopener" class="btn btn-outline-light">WhatsApp Us</a>
-  </div>
+  <form id="consultForm" class="consult-form" action="https://formspree.io/f/xanplawv" method="POST">
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Full name" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+    </div>
+    <div class="form-row">
+      <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" required>
+    </div>
+    <textarea name="message" placeholder="Tell us a bit about your hair loss and goals" rows="3"></textarea>
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <input type="hidden" name="_subject" value="New consultation request — peakhairtransplant.com">
+    <div class="form-actions">
+      <button type="submit" class="btn btn-cream">Request My Free Consultation</button>
+      <a href="https://wa.me/19172663038" target="_blank" rel="noopener" class="btn btn-outline-light">Or WhatsApp Us</a>
+    </div>
+    <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+  </form>
 </section>
 
 <footer>
@@ -590,6 +617,39 @@ document.querySelectorAll('.filters button').forEach(b=>{
   const step=()=>{const card=c.querySelector('.ba-card');return card?card.offsetWidth+14:250};
   document.getElementById('carNext').addEventListener('click',()=>c.scrollBy({left:step()*2,behavior:'smooth'}));
   document.getElementById('carPrev').addEventListener('click',()=>c.scrollBy({left:-step()*2,behavior:'smooth'}));
+})();
+// Consultation form — AJAX submit to Formspree, falls back to normal POST if JS fails
+(function(){
+  const form=document.getElementById('consultForm');
+  if(!form)return;
+  const note=document.getElementById('formNote');
+  const btn=form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    note.textContent='';
+    note.className='form-note';
+    btn.disabled=true;
+    const originalLabel=btn.textContent;
+    btn.textContent='Sending…';
+    try{
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+      if(res.ok){
+        form.reset();
+        note.textContent="Thanks — we'll be in touch within one business day.";
+        note.classList.add('success');
+      }else{
+        const data=await res.json().catch(()=>({}));
+        note.textContent=(data.errors&&data.errors.map(x=>x.message).join(', '))||'Something went wrong. Please try WhatsApp or email us directly.';
+        note.classList.add('error');
+      }
+    }catch(err){
+      note.textContent='Something went wrong. Please try WhatsApp or email us directly.';
+      note.classList.add('error');
+    }finally{
+      btn.disabled=false;
+      btn.textContent=originalLabel;
+    }
+  });
 })();
 // Ensure hero video autoplays on mobile (some browsers need a nudge)
 (function(){
