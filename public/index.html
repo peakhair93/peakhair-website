@@ -64,6 +64,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
 .nav-links a{opacity:.85;transition:all .2s}
 .nav-links a:hover{opacity:1;color:var(--sage)}
+.nav-treatment{position:relative}.nav-treatment summary{cursor:pointer;list-style:none;opacity:.85}.nav-treatment summary::-webkit-details-marker{display:none}.nav-treatment summary::after{content:'⌄';margin-left:5px}.nav-treatment[open] summary{color:var(--forest)}.nav-treatment-menu{position:absolute;top:calc(100% + 17px);left:-16px;z-index:20;min-width:225px;padding:10px;background:var(--paper);box-shadow:0 12px 35px rgba(21,43,33,.18);border-radius:14px;display:grid;gap:2px}.nav-treatment-menu a{display:block;padding:10px 12px;border-radius:8px;white-space:nowrap}.nav-treatment-menu a:hover{background:#eae4d6}
 .nav-cta{display:flex;gap:12px;align-items:center}
 .nav-cta .btn{padding:11px 22px;font-size:14px}
 .menu-btn{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--forest)}
@@ -116,7 +117,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .card ul{list-style:none;margin-bottom:28px;flex:1}
 .card li{font-size:14px;padding:9px 0;border-bottom:1px solid rgba(243,239,230,.12);color:rgba(243,239,230,.9)}
 .card li::before{content:'✓  ';color:var(--sand)}
-.card .btn{align-self:flex-start}
+.card .btn{align-self:flex-start}.cards .card{position:relative;overflow:hidden;cursor:pointer}.cards .card .btn::after{content:'';position:absolute;inset:0;z-index:1}.cards .card:focus-within{outline:3px solid var(--sand);outline-offset:3px}.treatment-art{height:116px;margin:-34px -30px 26px;position:relative;overflow:hidden;background:linear-gradient(135deg,#52725c,#b8ac83);border-radius:23px 23px 0 0}.treatment-art::before{content:'';position:absolute;width:175px;height:175px;border:1px solid rgba(255,255,255,.45);border-radius:50%;right:11%;top:-68px;box-shadow:0 0 0 32px rgba(255,255,255,.07),0 0 0 65px rgba(255,255,255,.045)}.treatment-art::after{content:'';position:absolute;width:42px;height:42px;border-radius:50%;right:23%;bottom:12px;background:rgba(243,239,230,.42)}.treatment-art span{position:absolute;bottom:16px;left:30px;font:500 14px var(--font-display);letter-spacing:.03em;color:#fff}.treatment-art.dhi{background:linear-gradient(135deg,#375f58,#a4b5a2)}.treatment-art.prp{background:linear-gradient(135deg,#416b53,#799f76)}.treatment-art.stem{background:linear-gradient(135deg,#3d5644,#8b987b)}.card.featured .treatment-art{border-radius:23px 23px 0 0}
 .card.featured{background:var(--sand);border-color:var(--sand)}
 .card.featured .tag{color:var(--forest-deep)}
 .card.featured h3{color:var(--forest-deep)}
@@ -257,6 +258,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
   .nav-links{display:none;position:absolute;top:100%;left:0;right:0;padding:16px 24px 22px;background:var(--paper);box-shadow:0 16px 24px rgba(30,59,46,.12);flex-direction:column;gap:0;max-height:calc(100vh - 74px);overflow-y:auto}
   .nav-links.open{display:flex}
   .nav-links a{padding:12px 0}
+  .nav-treatment{padding:12px 0}.nav-treatment summary{font-size:14px}.nav-treatment-menu{position:static;box-shadow:none;padding:5px 0 0 10px;min-width:0;background:transparent}.nav-treatment-menu a{padding:8px 12px}
   .menu-btn{display:block}
 }
 @media(max-width:960px){
@@ -294,8 +296,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
   <div class="container nav">
     <a class="logo" href="#" aria-label="Peak Hair Restoration Clinic"><img src="assets/peak-logo-2x.png" alt="Peak Hair Restoration Clinic"></a>
     <nav class="nav-links" id="primary-nav">
-      <a href="#treatments">Treatments</a>
-      <a href="/fue">FUE Techniques</a>
+      <details class="nav-treatment"><summary>Treatments</summary><div class="nav-treatment-menu"><a href="/fue">FUE Techniques</a><a href="/dhi-hair-transplant">DHI Implantation</a><a href="/prp-hair-restoration">PRP Packages</a><a href="/stem-cell-hair-therapy">Stem Cell Information</a></div></details>
       <a href="#results">Results</a>
       <a href="#process">How It Works</a>
       <a href="#locations">Locations</a>
@@ -364,21 +365,23 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <div class="eyebrow">Treatments</div>
         <h2>Treatment options for <em>your</em> hair</h2>
       </div>
-      <p>From advanced surgical techniques to regenerative therapy — your consultation determines which approach fits your hair loss stage and goals.</p>
+      <p>Four ways to explore your options. Select a treatment to learn what it involves, then discuss suitability with a clinician.</p>
     </div>
     <div class="cards">
       <div class="card">
-        <div class="tag">Most Popular</div>
-        <h3>Sapphire FUE</h3>
-        <p>Follicular extraction using sapphire-blade incisions for denser packing and faster healing.</p>
+        <div class="treatment-art fue" aria-hidden="true"><span>01 / Surgical restoration</span></div>
+        <div class="tag">Follicular extraction</div>
+        <h3>FUE Techniques</h3>
+        <p>Transplant follicles from the donor area to a planned hairline or thinning area. Explore Sapphire, unshaven and other FUE approaches.</p>
         <ul>
-          <li>Minimal scarring, quick recovery</li>
-          <li>High-density natural coverage</li>
-          <li>Single-session solutions available</li>
+          <li>Personalized donor-area assessment</li>
+          <li>Hairline and graft planning</li>
+          <li>Different preparation and placement options</li>
         </ul>
         <a href="/fue" class="btn btn-cream">Explore FUE Techniques</a>
       </div>
       <div class="card">
+        <div class="treatment-art dhi" aria-hidden="true"><span>02 / Precision placement</span></div>
         <div class="tag">Implanter-Assisted</div>
         <h3>DHI Hair Implantation</h3>
         <p>An implanter-assisted way to place harvested grafts. Your surgeon assesses donor capacity and explains whether this approach fits your hairline plan.</p>
@@ -390,6 +393,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <a href="/dhi-hair-transplant" class="btn btn-cream">Explore DHI</a>
       </div>
       <div class="card featured">
+        <div class="treatment-art prp" aria-hidden="true"><span>03 / Non-surgical option</span></div>
         <div class="tag">Non-Surgical</div>
         <h3>PRP Package</h3>
         <p>Platelet-rich plasma prepared from your own blood, injected into selected areas of the scalp after a hair-loss assessment.</p>
@@ -401,15 +405,16 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <a href="/prp-hair-restoration" class="btn btn-forest">Learn About PRP</a>
       </div>
       <div class="card">
-        <div class="tag">Regenerative</div>
+        <div class="treatment-art stem" aria-hidden="true"><span>04 / Regenerative discussion</span></div>
+        <div class="tag">Treatment information</div>
         <h3>Stem Cell Therapy</h3>
-        <p>Non-surgical regenerative treatment that strengthens existing follicles and supports transplant results.</p>
+        <p>Learn what this broad term may mean, the limits of the evidence, and the product and regulatory questions to ask before considering it.</p>
         <ul>
-          <li>No downtime, no surgery</li>
-          <li>Boosts graft survival post-op</li>
-          <li>Ideal for early-stage thinning</li>
+          <li>Clarify the exact product and procedure</li>
+          <li>Understand evidence and possible risks</li>
+          <li>Confirm availability and regulatory status</li>
         </ul>
-        <a href="#contact" class="btn btn-cream">Learn About Stem Cell</a>
+        <a href="/stem-cell-hair-therapy" class="btn btn-cream">Explore Stem Cell Information</a>
       </div>
     </div>
   </div>
@@ -638,7 +643,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <a class="logo" href="#" aria-label="Peak Hair Restoration Clinic"><img src="assets/peak-logo-2x.png" alt="Peak Hair Restoration Clinic"></a>
         <p style="margin-top:14px;max-width:280px">Premium hair restoration with Sapphire FUE, PRP packages and Stem Cell treatments — Istanbul, New York & Miami.</p>
       </div>
-      <div><h4>Treatments</h4><a href="/fue">FUE Techniques</a><a href="/dhi-hair-transplant">DHI Hair Implantation</a><a href="#treatments">Sapphire FUE</a><a href="/prp-hair-restoration">PRP Packages</a><a href="#treatments">Stem Cell Therapy</a></div>
+      <div><h4>Treatments</h4><a href="/fue">FUE Techniques</a><a href="/dhi-hair-transplant">DHI Hair Implantation</a><a href="#treatments">Sapphire FUE</a><a href="/prp-hair-restoration">PRP Packages</a><a href="/stem-cell-hair-therapy">Stem Cell Therapy</a></div>
       <div><h4>Clinic</h4><a href="#results">Results</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#financing">Financing</a><a href="#faq">FAQ</a><a href="/blog">Blog</a></div>
       <div><h4>Contact</h4><a href="mailto:info@peakhairtransplant.com">info@peakhairtransplant.com</a><a href="#contact">Book a Consultation</a><a href="https://wa.me/19172663038" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
