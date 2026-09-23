@@ -240,7 +240,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .consult-form textarea{margin-bottom:20px;resize:vertical;min-height:88px}
 .form-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .form-actions .btn[disabled]{opacity:.6;cursor:default;transform:none}
-.form-note{margin-top:16px;font-size:14px;text-align:center;min-height:1.2em}
+.form-note{margin-top:16px;font-size:14px;text-align:center;min-height:1.2em}.consult-form .form-hint{font-size:13px;line-height:1.55;color:var(--paper);opacity:.85;margin:8px 0 14px}.consult-form .consent{display:flex;align-items:flex-start;gap:10px;color:var(--paper);font-size:13px;line-height:1.5;margin:14px 0 20px;cursor:pointer}.consult-form .consent input[type="checkbox"]{width:18px;height:18px;min-width:18px;margin:2px 0 0;padding:0;accent-color:#2b7752}.consult-form .consent a{color:var(--paper);text-underline-offset:3px}.consult-form .consent a:hover{color:var(--sand)}
 .form-note.success{color:var(--sand-soft)}
 .form-note.error{color:#E8A6A6}
 
@@ -636,22 +636,30 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
 <section class="cta-band" id="contact">
   <div class="eyebrow" style="color:var(--sand)">Start Today</div>
   <h2>Your restoration journey starts with <em>one conversation</em></h2>
-  <p>Free consultation. Honest assessment. No obligation.</p>
+  <p>Request a free consultation. Peak’s coordination team will contact you to arrange a time; a licensed clinician from JC Jimenez Medical Health Wellness Services PLLC handles medical evaluation and treatment decisions. Sending this form does not book an appointment.</p>
   <form id="consultForm" class="consult-form" action="https://formspree.io/f/xanplawv" method="POST">
     <div class="form-row">
-      <input type="text" name="name" placeholder="Full name" autocomplete="name" required>
-      <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+      <input type="text" name="name" placeholder="Full name" aria-label="Full name" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Email address" aria-label="Email address" autocomplete="email" required>
     </div>
     <div class="form-row">
-      <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" required>
-      <select name="location" required>
+      <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" autocomplete="tel" required>
+      <select name="location" aria-label="Preferred location" required>
         <option value="" disabled selected>Preferred location</option>
         <option value="istanbul">Istanbul</option>
         <option value="newyork">New York</option>
         <option value="miami">Miami</option>
       </select>
     </div>
-    <textarea name="message" placeholder="Tell us a bit about your hair loss and goals" rows="3"></textarea>
+    <div class="form-row">
+      <select name="interest" aria-label="Treatment you want to discuss"><option value="" selected>Interested in (optional)</option><option value="not_sure">Not sure yet</option><option value="fue">FUE hair transplant</option><option value="dhi">DHI hair transplant</option><option value="prp">PRP</option><option value="stem_cell">Stem cell information</option></select>
+      <select name="contact_method" aria-label="Preferred way to be contacted"><option value="" selected>Contact me by (optional)</option><option value="phone">Phone</option><option value="email">Email</option></select>
+    </div>
+    <div class="form-row">
+      <select name="callback_time" aria-label="Best time to contact you"><option value="" selected>Best time to contact (optional)</option><option value="morning">Morning</option><option value="afternoon">Afternoon</option><option value="evening">Evening</option></select>
+    </div>
+    <p class="form-hint">For scheduling only. Please do not include medical history, photos, or payment-card details here. Do not enter a credit card to request a free consultation.</p>
+    <label class="consent"><input type="checkbox" name="contact_consent" value="yes" required><span>I agree that Peak may use my details to contact me about this consultation request. I have read the <a href="/privacy-policy">Privacy Policy</a>.</span></label>
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
     <input type="hidden" name="_subject" value="New consultation request — peakhairtransplant.com">
     <div class="form-actions">
@@ -760,7 +768,7 @@ document.querySelectorAll('.filters button').forEach(b=>{
       const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
       if(res.ok){
         form.reset();
-        note.textContent="Thanks — we'll be in touch within one business day.";
+        note.textContent="Your request was sent. Peak’s coordination team will contact you to arrange a consultation.";
         note.classList.add('success');
       }else{
         const data=await res.json().catch(()=>({}));
