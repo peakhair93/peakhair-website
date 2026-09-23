@@ -285,6 +285,10 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
   .doc-credentials{gap:18px}
   .doc-sound{top:16px;right:16px;padding:8px 14px;font-size:12px}
 }
+/* Consistent Peak-green interaction states across navigation and calls to action. */
+.nav-links{gap:8px;align-items:center}.nav-links>a,.nav-treatment>summary{display:block;padding:8px 11px;border-radius:999px;opacity:1;transition:background .2s,color .2s}.nav-links>a:hover,.nav-links>a:focus-visible,.nav-links>a:active,.nav-links>a.is-current,.nav-treatment>summary:hover,.nav-treatment>summary:focus-visible,.nav-treatment[open]>summary{background:var(--forest);color:var(--paper);opacity:1;text-decoration:none}.nav-treatment-menu a:hover,.nav-treatment-menu a:focus-visible,.nav-treatment-menu a:active{background:var(--forest);color:var(--paper)}
+.btn-cream:hover,.btn-cream:focus-visible,.btn-cream:active,.btn-outline-light:hover,.btn-outline-light:focus-visible,.btn-outline-light:active{background:var(--forest);color:var(--paper);border-color:var(--forest)}.btn-forest:focus-visible,.btn-forest:active{background:var(--forest-deep);color:var(--paper)}.cards .card:not(.featured):hover,.cards .card:not(.featured):focus-visible{background:#315b43}.cards .card.featured:hover,.cards .card.featured:focus-visible{outline-color:var(--forest);box-shadow:0 0 0 3px var(--forest)}.foot-grid a:hover,.foot-grid a:focus-visible{color:var(--forest);text-decoration:underline;text-underline-offset:3px}.social-links a:hover,.social-links a:focus-visible{color:var(--paper);text-decoration:none}.quote:hover,.quote:focus-visible{border-color:var(--forest)}
+@media(max-width:1120px){.nav-links{align-items:stretch}.nav-links>a{padding:12px}.nav-treatment>summary{padding:8px 12px}.nav-treatment-menu a{border-radius:9px}}
 </style>
 <script src="https://px.get-ryze.ai/px.js?key=rz_pk_2611c15723a78b835e45129619f53927"></script>
 </head>
@@ -684,6 +688,8 @@ document.querySelectorAll('.faq button').forEach(btn=>{
     if(!open)item.classList.add('open');
   });
 });
+// Keep the selected section green after navigating within the page.
+(function(){const links=document.querySelectorAll('.nav-links>a[href^="#"]');function sync(){links.forEach(a=>a.classList.toggle('is-current',!!location.hash&&a.getAttribute('href')===location.hash));}window.addEventListener('hashchange',sync);sync();})();
 // Result filter pills (visual only in mockup)
 document.querySelectorAll('.filters button').forEach(b=>{
   b.addEventListener('click',()=>{
