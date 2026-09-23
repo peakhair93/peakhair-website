@@ -198,6 +198,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 /* Locations */
 .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
 .loc{border-radius:24px;overflow:hidden;position:relative;aspect-ratio:4/4.8;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;color:var(--paper)}
+.loc-destination{text-decoration:none}.loc-destination:hover,.loc-destination:focus-visible{color:var(--paper)}.loc-destination:focus-visible{outline:3px solid var(--sand);outline-offset:4px}
 .loc::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,26,20,.15) 20%,rgba(15,26,20,.88));z-index:1}
 .loc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .loc:hover .loc-img{transform:scale(1.06)}
@@ -353,7 +354,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
       </div>
       <div class="hero-meta">
         <div><b>5,000+</b>Procedures performed</div>
-        <div><b>3</b>Clinic locations</div>
+        <div><b>2</b>Current cities · Miami coming soon</div>
         <div><b>12 mo</b>Aftercare programme</div>
       </div>
     </div>
@@ -587,17 +588,18 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
   <div class="container">
     <div style="text-align:center;max-width:640px;margin:0 auto">
       <div class="eyebrow">Locations</div>
-      <h2 style="font-size:clamp(34px,4vw,54px)">Three cities. One standard of <em>care</em>.</h2>
+      <h2 style="font-size:clamp(34px,4vw,54px)">Choose your <em>city</em>.</h2>
+      <p>Istanbul and New York are available to explore. Miami is coming soon.</p>
     </div>
     <div class="loc-grid">
-      <div class="loc">
+      <a class="loc loc-destination" href="/istanbul-hair-transplant" aria-label="Explore Istanbul hair transplants">
         <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/28764621/pexels-photo-28764621.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Istanbul skyline with the Galata Tower">
-        <h3>Istanbul</h3><p>Our flagship surgical centre — all-inclusive packages with hotel & transfers.</p><a href="#contact" class="btn btn-cream">Plan Your Visit</a>
-      </div>
-      <div class="loc">
+        <h3>Istanbul</h3><p>Explore surgical options and what to confirm before planning your visit.</p><span class="btn btn-cream">Explore Istanbul</span>
+      </a>
+      <a class="loc loc-destination" href="/new-york-hair-transplant" aria-label="Explore New York City hair transplants">
         <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/18388935/pexels-photo-18388935.jpeg?auto=compress&cs=tinysrgb&w=900" alt="New York City skyline">
-        <h3>New York</h3><p>A premium hair restoration clinic in the heart of Manhattan.</p><a href="/new-york-hair-transplant" class="btn btn-cream">Explore New York</a>
-      </div>
+        <h3>New York City</h3><p>Explore hair restoration in Manhattan and request an assessment.</p><span class="btn btn-cream">Explore New York</span>
+      </a>
       <div class="loc">
         <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/34650327/pexels-photo-34650327.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Miami skyline and waterfront">
         <h3>Miami</h3><p>Coming soon.</p><span class="btn btn-cream" style="opacity:.7;cursor:default">Coming Soon</span>
@@ -713,7 +715,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
     <div class="foot-grid">
       <div>
         <a class="logo" href="#" aria-label="Peak Hair Restoration Clinic"><img src="assets/peak-logo-2x.png" alt="Peak Hair Restoration Clinic"></a>
-        <p style="margin-top:14px;max-width:280px">Premium hair restoration with Sapphire FUE, PRP packages and Stem Cell treatments — Istanbul, New York & Miami.</p>
+        <p style="margin-top:14px;max-width:280px">Explore hair restoration in Istanbul and New York. Miami coming soon.</p>
       </div>
       <div><h4>Treatments</h4><a href="/fue">FUE Techniques</a><a href="/dhi-hair-transplant">DHI Hair Implantation</a><a href="#treatments">Sapphire FUE</a><a href="/prp-hair-restoration">PRP Packages</a><a href="/stem-cell-hair-therapy">Stem Cell Therapy</a></div>
       <div><h4>Clinic</h4><a href="#results">Results</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#financing">Financing</a><a href="#faq">FAQ</a><a href="/pre-op-checklist">Pre-Op Checklist</a><a href="/post-op-guide">Post-Op Guide</a><a href="/blog">Blog</a></div>
