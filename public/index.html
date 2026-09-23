@@ -117,7 +117,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .card ul{list-style:none;margin-bottom:28px;flex:1}
 .card li{font-size:14px;padding:9px 0;border-bottom:1px solid rgba(243,239,230,.12);color:rgba(243,239,230,.9)}
 .card li::before{content:'✓  ';color:var(--sand)}
-.card .btn{align-self:flex-start}.cards .card{position:relative;overflow:hidden;cursor:pointer}.cards .card .btn::after{content:'';position:absolute;inset:0;z-index:1}.cards .card:focus-within{outline:3px solid var(--sand);outline-offset:3px}.treatment-art{height:116px;margin:-34px -30px 26px;position:relative;overflow:hidden;background:linear-gradient(135deg,#52725c,#b8ac83);border-radius:23px 23px 0 0}.treatment-art::before{content:'';position:absolute;width:175px;height:175px;border:1px solid rgba(255,255,255,.45);border-radius:50%;right:11%;top:-68px;box-shadow:0 0 0 32px rgba(255,255,255,.07),0 0 0 65px rgba(255,255,255,.045)}.treatment-art::after{content:'';position:absolute;width:42px;height:42px;border-radius:50%;right:23%;bottom:12px;background:rgba(243,239,230,.42)}.treatment-art span{position:absolute;bottom:16px;left:30px;font:500 14px var(--font-display);letter-spacing:.03em;color:#fff}.treatment-art.dhi{background:linear-gradient(135deg,#375f58,#a4b5a2)}.treatment-art.prp{background:linear-gradient(135deg,#416b53,#799f76)}.treatment-art.stem{background:linear-gradient(135deg,#3d5644,#8b987b)}.card.featured .treatment-art{border-radius:23px 23px 0 0}
+.card .btn{align-self:flex-start}.cards .card{position:relative;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit}.cards .card:focus-visible{outline:3px solid var(--sand);outline-offset:3px}.treatment-art{height:116px;margin:-34px -30px 26px;position:relative;overflow:hidden;background:linear-gradient(135deg,#52725c,#b8ac83);border-radius:23px 23px 0 0}.treatment-art::before{content:'';position:absolute;width:175px;height:175px;border:1px solid rgba(255,255,255,.45);border-radius:50%;right:11%;top:-68px;box-shadow:0 0 0 32px rgba(255,255,255,.07),0 0 0 65px rgba(255,255,255,.045)}.treatment-art::after{content:'';position:absolute;width:42px;height:42px;border-radius:50%;right:23%;bottom:12px;background:rgba(243,239,230,.42)}.treatment-art span{position:absolute;bottom:16px;left:30px;font:500 14px var(--font-display);letter-spacing:.03em;color:#fff}.treatment-art.dhi{background:linear-gradient(135deg,#375f58,#a4b5a2)}.treatment-art.prp{background:linear-gradient(135deg,#416b53,#799f76)}.treatment-art.stem{background:linear-gradient(135deg,#3d5644,#8b987b)}.card.featured .treatment-art{border-radius:23px 23px 0 0}
 .card.featured{background:var(--sand);border-color:var(--sand)}
 .card.featured .tag{color:var(--forest-deep)}
 .card.featured h3{color:var(--forest-deep)}
@@ -368,7 +368,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
       <p>Four ways to explore your options. Select a treatment to learn what it involves, then discuss suitability with a clinician.</p>
     </div>
     <div class="cards">
-      <div class="card">
+      <a class="card" href="/fue" aria-label="Explore FUE techniques">
         <div class="treatment-art fue" aria-hidden="true"><span>01 / Surgical restoration</span></div>
         <div class="tag">Follicular extraction</div>
         <h3>FUE Techniques</h3>
@@ -378,9 +378,9 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
           <li>Hairline and graft planning</li>
           <li>Different preparation and placement options</li>
         </ul>
-        <a href="/fue" class="btn btn-cream">Explore FUE Techniques</a>
-      </div>
-      <div class="card">
+        <span class="btn btn-cream">Explore FUE Techniques</span>
+      </a>
+      <a class="card" href="/dhi-hair-transplant" aria-label="Explore DHI hair implantation">
         <div class="treatment-art dhi" aria-hidden="true"><span>02 / Precision placement</span></div>
         <div class="tag">Implanter-Assisted</div>
         <h3>DHI Hair Implantation</h3>
@@ -390,9 +390,9 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
           <li>Can be combined with FUE harvesting</li>
           <li>Individual assessment required</li>
         </ul>
-        <a href="/dhi-hair-transplant" class="btn btn-cream">Explore DHI</a>
-      </div>
-      <div class="card featured">
+        <span class="btn btn-cream">Explore DHI</span>
+      </a>
+      <a class="card featured" href="/prp-hair-restoration" aria-label="Learn about PRP packages">
         <div class="treatment-art prp" aria-hidden="true"><span>03 / Non-surgical option</span></div>
         <div class="tag">Non-Surgical</div>
         <h3>PRP Package</h3>
@@ -402,9 +402,9 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
           <li>No graft harvesting or transplant surgery</li>
           <li>Results and recovery vary by patient</li>
         </ul>
-        <a href="/prp-hair-restoration" class="btn btn-forest">Learn About PRP</a>
-      </div>
-      <div class="card">
+        <span class="btn btn-forest">Learn About PRP</span>
+      </a>
+      <a class="card" href="/stem-cell-hair-therapy" aria-label="Explore stem cell therapy information">
         <div class="treatment-art stem" aria-hidden="true"><span>04 / Regenerative discussion</span></div>
         <div class="tag">Treatment information</div>
         <h3>Stem Cell Therapy</h3>
@@ -414,8 +414,8 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
           <li>Understand evidence and possible risks</li>
           <li>Confirm availability and regulatory status</li>
         </ul>
-        <a href="/stem-cell-hair-therapy" class="btn btn-cream">Explore Stem Cell Information</a>
-      </div>
+        <span class="btn btn-cream">Explore Stem Cell Information</span>
+      </a>
     </div>
   </div>
 </section>
