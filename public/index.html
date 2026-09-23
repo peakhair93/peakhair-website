@@ -253,12 +253,16 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
 .foot-bottom{border-top:1px solid rgba(30,59,46,.12);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px}
 
 /* Responsive */
+@media(max-width:1120px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;padding:16px 24px 22px;background:var(--paper);box-shadow:0 16px 24px rgba(30,59,46,.12);flex-direction:column;gap:0;max-height:calc(100vh - 74px);overflow-y:auto}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0}
+  .menu-btn{display:block}
+}
 @media(max-width:960px){
   .intro-grid{grid-template-columns:1fr}
   .cards,.loc-grid,.steps-grid{grid-template-columns:1fr 1fr}
   .quote-grid{columns:2}
-  .nav-links{display:none}
-  .menu-btn{display:block}
   .foot-grid{grid-template-columns:1fr 1fr}
   .hero-frame{min-height:78vh}
   .hero-content{padding:0 28px 48px}
@@ -289,18 +293,19 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
 <header>
   <div class="container nav">
     <a class="logo" href="#" aria-label="Peak Hair Restoration Clinic"><img src="assets/peak-logo-2x.png" alt="Peak Hair Restoration Clinic"></a>
-    <nav class="nav-links">
+    <nav class="nav-links" id="primary-nav">
       <a href="#treatments">Treatments</a>
       <a href="#results">Results</a>
       <a href="#process">How It Works</a>
       <a href="#locations">Locations</a>
       <a href="#financing">Financing</a>
       <a href="#faq">FAQ</a>
+      <a href="/blog">Blog</a>
     </nav>
     <div class="nav-cta">
       <a href="#contact" class="btn btn-forest">Free Consult</a>
     </div>
-    <button class="menu-btn" aria-label="Menu">☰</button>
+    <button class="menu-btn" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -622,7 +627,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <p style="margin-top:14px;max-width:280px">Premium hair restoration with Sapphire FUE, PRP packages and Stem Cell treatments — Istanbul, New York & Miami.</p>
       </div>
       <div><h4>Treatments</h4><a href="#treatments">Sapphire FUE</a><a href="#treatments">PRP Packages</a><a href="#treatments">Stem Cell Therapy</a></div>
-      <div><h4>Clinic</h4><a href="#results">Results</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#financing">Financing</a><a href="#faq">FAQ</a></div>
+      <div><h4>Clinic</h4><a href="#results">Results</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#financing">Financing</a><a href="#faq">FAQ</a><a href="/blog">Blog</a></div>
       <div><h4>Contact</h4><a href="mailto:info@peakhairtransplant.com">info@peakhairtransplant.com</a><a href="#contact">Book a Consultation</a><a href="https://wa.me/19172663038" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
     <div class="foot-bottom">
@@ -633,6 +638,25 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
 </footer>
 
 <script>
+// Mobile navigation
+const menuButton=document.querySelector('.menu-btn');
+const primaryNav=document.querySelector('#primary-nav');
+menuButton.addEventListener('click',()=>{
+  const open=primaryNav.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded',String(open));
+});
+primaryNav.addEventListener('click',event=>{
+  if(event.target.closest('a')){
+    primaryNav.classList.remove('open');
+    menuButton.setAttribute('aria-expanded','false');
+  }
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'){
+    primaryNav.classList.remove('open');
+    menuButton.setAttribute('aria-expanded','false');
+  }
+});
 // FAQ accordion
 document.querySelectorAll('.faq button').forEach(btn=>{
   btn.addEventListener('click',()=>{
