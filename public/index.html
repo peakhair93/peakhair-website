@@ -209,6 +209,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdro
 .loc h3{font-size:30px;color:var(--paper);margin-bottom:6px}
 .loc p{font-size:14px;color:rgba(243,239,230,.8);margin-bottom:16px}
 .loc .btn{padding:10px 20px;font-size:13px}
+.nyc-clinic-panel{display:grid;grid-template-columns:minmax(270px,.85fr) minmax(0,1.4fr);gap:28px;align-items:stretch;margin-top:36px;background:var(--paper-soft);border-radius:28px;padding:28px}.nyc-clinic-details{padding:25px 18px;display:flex;flex-direction:column;justify-content:center}.nyc-clinic-details h3{font-size:clamp(27px,3vw,38px);margin-bottom:18px}.nyc-clinic-details address{font-style:normal;font-size:18px;line-height:1.6;margin-bottom:12px}.nyc-clinic-details p{font-size:14px;color:var(--sage);line-height:1.65;margin-bottom:24px}.nyc-clinic-details .btn{align-self:flex-start}.nyc-clinic-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:340px}.nyc-clinic-photos img{height:100%;width:100%;object-fit:cover;border-radius:16px}.nyc-clinic-photos img:first-child{object-position:center center}.nyc-clinic-photos img:last-child{object-position:center center}@media(max-width:800px){.nyc-clinic-panel{grid-template-columns:1fr;padding:20px}.nyc-clinic-details{padding:10px 5px}.nyc-clinic-photos{min-height:260px}}@media(max-width:520px){.nyc-clinic-photos{gap:8px;min-height:185px}.nyc-clinic-photos img{border-radius:11px}}
 
 /* Financing */
 .finance-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;margin-top:8px}
@@ -645,6 +646,19 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
       <div class="loc">
         <img class="loc-img" loading="lazy" src="https://images.pexels.com/photos/34650327/pexels-photo-34650327.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Miami skyline and waterfront">
         <h3>Miami</h3><p>Sunlit days, effortless confidence. Peak’s thoughtful approach to natural-looking hair restoration is headed for the Magic City. Our Miami location is coming soon.</p><span class="btn btn-cream" style="opacity:.7;cursor:default">Coming Soon</span>
+      </div>
+    </div>
+    <div class="nyc-clinic-panel" id="nyc-clinic" aria-labelledby="nyc-clinic-title">
+      <div class="nyc-clinic-details">
+        <div class="eyebrow">Visit us · Midtown Manhattan</div>
+        <h3 id="nyc-clinic-title">Our New York clinic</h3>
+        <address>240 W 37th St, 5th Floor<br>New York, NY 10018</address>
+        <p>Address shown on Peak’s Google Maps listing. Please confirm your appointment details before visiting.</p>
+        <a class="btn btn-forest" href="https://www.google.com/maps/place/Peak+Hair+Restoration+%26+Transplant+Center-+New+York+City/@40.7536972,-73.9938625,17z/data=!3m1!4b1!4m6!3m5!1s0x89c2596e8f4200d5:0x31d6169c121f596c!8m2!3d40.7536932!4d-73.9912876!16s%2Fg%2F11mm4bbfdp" target="_blank" rel="noopener noreferrer">View on Google Maps ↗</a>
+      </div>
+      <div class="nyc-clinic-photos" aria-label="Photographs of Peak’s New York clinic">
+        <img src="/assets/peak-nyc-clinic-room-1.jpg" alt="Treatment room at Peak Hair Restoration in New York, with treatment bed and clinic sign" loading="lazy" width="1024" height="1024">
+        <img src="/assets/peak-nyc-clinic-room-2.jpg" alt="Second view of Peak's New York treatment room" loading="lazy" width="1024" height="1024">
       </div>
     </div>
   </div>
