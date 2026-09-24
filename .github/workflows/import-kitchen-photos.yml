@@ -1,0 +1,49 @@
+name: Import clinic kitchen photos
+on:
+  workflow_dispatch:
+    inputs:
+      image_one:
+        description: Kitchen photo link
+        required: true
+      image_two:
+        description: Kitchen and lounge photo link
+        required: true
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - name: Save client kitchen photos
+        env:
+          IMAGE_ONE: ${{ inputs.image_one }}
+          IMAGE_TWO: ${{ inputs.image_two }}
+        run: |
+          python - <<'PY'
+          import io, os, urllib.request, urllib.parse
+          from PIL import Image, ImageOps
+          os.makedirs('public/assets', exist_ok=True)
+          for key, filename in [('IMAGE_ONE','peak-nyc-clinic-kitchen-1.jpg'),('IMAGE_TWO','peak-nyc-clinic-kitchen-2.jpg')]:
+              url=os.environ[key]
+              parsed=urllib.parse.urlparse(url)
+              if parsed.scheme!='https' or parsed.hostname!='gwvckixiegkllthleuyt.supabase.co' or not parsed.path.startswith('/storage/v1/object/sign/paid-ads-chat-files/'):
+                  raise ValueError('Unexpected image link')
+              with urllib.request.urlopen(url, timeout=45) as response:
+                  raw=response.read(12000000)
+              image=ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert('RGB')
+              image.thumbnail((1500,1500),Image.Resampling.LANCZOS)
+              image.save('public/assets/'+filename,'JPEG',quality=85,optimize=True)
+              print('Saved', filename, image.size)
+          PY
+      - name: Commit images
+        run: |
+          git config user.name 'Peak Photo Import'
+          git config user.email 'photo-import@users.noreply.github.com'
+          git add public/assets/peak-nyc-clinic-kitchen-{1,2}.jpg
+          git commit -m 'Add Peak clinic kitchen photos'
+          git push
