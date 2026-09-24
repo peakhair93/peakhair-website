@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">Drawing a proposed hairline</title><desc id="desc">Illustration of a clinician drawing a curved hairline on a patient's forehead with a marker.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e7ebdf"/><stop offset="1" stop-color="#f4f0e5"/></linearGradient><linearGradient id="skin" x2="1" y2=".4"><stop stop-color="#c88e72"/><stop offset=".55" stop-color="#e8b79a"/><stop offset="1" stop-color="#a96651"/></linearGradient><linearGradient id="hair" x2="0" y2="1"><stop stop-color="#18251d"/><stop offset="1" stop-color="#394b3a"/></linearGradient><linearGradient id="sleeve" x2="0" y2="1"><stop stop-color="#f8f8f3"/><stop offset="1" stop-color="#cdd6ca"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="22"/></filter></defs>
+<rect width="1200" height="720" fill="url(#bg)"/><circle cx="150" cy="90" r="310" fill="#fff" opacity=".35"/><path d="M0 590Q300 490 560 605T1200 535V720H0Z" fill="#ced9c8" opacity=".4"/>
+<ellipse cx="559" cy="578" rx="385" ry="75" fill="#708b78" opacity=".18" filter="url(#shadow)"/>
+<!-- patient shoulder and neck -->
+<path d="M185 720Q218 559 425 546L771 552Q962 565 1018 720Z" fill="#233a2b"/><path d="M433 550Q475 586 594 594Q708 586 750 550L727 482H456Z" fill="url(#skin)"/>
+<!-- head -->
+<path d="M318 342Q290 160 435 88Q551 28 709 81Q855 126 855 341Q871 497 741 549Q612 614 462 549Q324 500 318 342Z" fill="url(#skin)"/>
+<path d="M333 371Q287 344 286 397Q292 463 356 458M843 370Q892 347 892 399Q880 460 830 458" fill="#cf9477" stroke="#a97762" stroke-width="8"/>
+<!-- dark short hair, high temples -->
+<path d="M313 344Q290 201 357 115Q421 35 548 30Q701 8 787 100Q874 191 856 344Q823 269 770 238Q714 188 648 211Q586 226 554 240Q480 270 410 233Q358 238 313 344Z" fill="url(#hair)"/>
+<path d="M322 300Q386 211 438 239Q496 278 568 233Q664 179 728 220Q797 224 848 304" fill="none" stroke="#536854" stroke-width="8" opacity=".55"/>
+<g opacity=".3" fill="none" stroke="#879f83" stroke-width="3"><path d="M355 235Q387 133 503 88"/><path d="M386 215Q450 101 582 68"/><path d="M458 218Q551 109 671 84"/><path d="M560 199Q682 116 772 151"/></g>
+<!-- facial features -->
+<path d="M401 404Q451 380 507 399M674 400Q731 379 787 402" fill="none" stroke="#5a3e34" stroke-width="13" stroke-linecap="round"/><path d="M407 427Q453 445 504 426M674 428Q729 445 781 424" fill="none" stroke="#402f2c" stroke-width="6" stroke-linecap="round"/><path d="M594 407L567 490Q601 509 627 488" fill="none" stroke="#9d6655" stroke-width="6" stroke-linecap="round"/><path d="M543 529Q596 544 651 526" fill="none" stroke="#9d6655" stroke-width="6" stroke-linecap="round"/>
+<!-- clinician's proposed hairline, visible on forehead -->
+<path d="M380 323Q443 343 507 326Q558 306 596 304Q650 306 699 323Q761 339 816 317" fill="none" stroke="#395582" stroke-width="8" stroke-linecap="round" stroke-dasharray="15 5"/><path d="M386 329Q455 349 512 331Q558 314 595 310Q661 313 716 333" fill="none" stroke="#394f71" stroke-width="3" opacity=".6"/>
+<!-- clinician's sleeve and hand entering from right, fine marker touching the hairline -->
+<path d="M1200 106Q1043 113 936 191L1011 299Q1086 258 1200 263Z" fill="url(#sleeve)" stroke="#b3c1b2" stroke-width="4"/><path d="M953 185Q913 188 868 224L810 278Q782 295 795 316Q809 336 838 319L900 286L920 303Q871 342 865 362Q861 385 884 387Q897 389 913 375L1008 291Q1032 269 1018 237L987 193Z" fill="#d49a7f" stroke="#a66f59" stroke-width="4"/><path d="M815 284L743 321" stroke="#283b38" stroke-width="17" stroke-linecap="round"/><path d="M747 319L713 331" stroke="#182725" stroke-width="9" stroke-linecap="round"/><circle cx="709" cy="332" r="4" fill="#3d587d"/><path d="M848 316Q862 286 900 270" fill="none" stroke="#aa765f" stroke-width="4"/>
+</svg>
