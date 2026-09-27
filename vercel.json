@@ -1,5 +1,12 @@
 {
   "outputDirectory": "public",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/blog/prp-hair-treatment-nyc-guide",
+      "destination": "/blog/prp-hair-treatment-nyc-guide-2026",
+      "permanent": true
+    }
+  ]
 }
