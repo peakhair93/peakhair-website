@@ -19,7 +19,7 @@ function seoHead({ title, description, canonical, type = 'website', image, schem
   const img = image || defaultImage;
   const tags = [
     `<meta name="robots" content="index, follow, max-image-preview:large">`,
-    `<meta property="og:site_name" content="Peak Hair Restoration">`,
+    `<meta property="og:site_name" content="Peak Hair Restoration &amp; Transplant Center">`,
     `<meta property="og:type" content="${type}">`,
     `<meta property="og:locale" content="en_US">`,
     `<meta property="og:title" content="${escape(title)}">`,
@@ -66,7 +66,7 @@ for (const article of articles) {
   const pageTitle = article.meta_title || title;
   const modified = date(article.updated_at) || published;
   const schema = { '@context': 'https://schema.org', '@graph': [
-    { '@type': 'BlogPosting', headline: title, description, url: url(slug), mainEntityOfPage: url(slug), image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : defaultImage, ...(published ? { datePublished: published } : {}), ...(modified ? { dateModified: modified } : {}), author: { '@type': 'Organization', name: 'Peak Hair Restoration', url: `${origin}/` }, publisher: { '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Peak Hair Restoration', logo: { '@type': 'ImageObject', url: `${origin}/assets/peak-logo-2x.png` } } },
+    { '@type': 'BlogPosting', headline: title, description, url: url(slug), mainEntityOfPage: url(slug), image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : defaultImage, ...(published ? { datePublished: published } : {}), ...(modified ? { dateModified: modified } : {}), author: { '@type': 'Organization', name: 'Peak Hair Restoration & Transplant Center', url: `${origin}/` }, publisher: { '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Peak Hair Restoration & Transplant Center', logo: { '@type': 'ImageObject', url: `${origin}/assets/peak-logo-2x.png` } } },
     breadcrumb([['Home', `${origin}/`], ['Blog', `${origin}/blog`], [title, url(slug)]])
   ] };
   await writeFile(path.join(target, filename), page(pageTitle, description, url(slug), main, { type: 'article', image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : null, schema }));
