@@ -26,7 +26,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A public/blog
+          git add -A public/blog public/sitemap.xml
           if ! git diff --cached --quiet; then
             git commit -m 'Generate Ryze blog pages [skip ci]'
             git push

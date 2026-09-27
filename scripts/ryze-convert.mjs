@@ -13,8 +13,30 @@ const stylesheet = `
 :root{--paper:#F4F0E5;--paper-soft:#E7EBDF;--forest:#233A2B;--forest-deep:#15291F;--sage:#52695A;--sand:#A9C9AA;--white:#FCFAF4}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--forest);font:16px/1.7 Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}a{color:var(--forest)}a:hover{color:var(--sage)}h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:500;line-height:1.15;letter-spacing:-.015em}.wrap{max-width:1100px;margin:auto;padding:0 24px}.sitehead{border-bottom:1px solid #1e3b2e20;background:var(--white)}.sitehead .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:90px}.sitehead img{width:145px;display:block}.sitehead nav{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:600}.sitehead a{text-decoration:none}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sage)}.intro{padding:76px 0 48px}.intro h1{font-size:clamp(38px,5vw,66px);max-width:850px;margin:16px 0}.intro p{max-width:680px;color:var(--sage);font-size:18px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;padding:0 0 96px}.card{border:1px solid #1e3b2e16;background:var(--white);border-radius:22px;overflow:hidden}.card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.card .inner{padding:28px}.card h2{font-size:27px;margin:8px 0 12px}.card p{color:var(--sage);margin:0 0 16px}.card a{text-decoration:none}.card a:hover{text-decoration:underline}.article{max-width:800px;margin:0 auto;padding:66px 24px 110px}.article .back{font-size:14px;font-weight:600;text-decoration:none}.article h1{font-size:clamp(38px,5vw,64px);margin:20px 0 18px}.article .dek{font-size:19px;color:var(--sage);margin-bottom:22px}.article time{color:var(--sage);font-size:14px}.heroimage{display:block;width:100%;border-radius:22px;margin:40px 0;max-height:560px;object-fit:cover}.content{font-size:17px;line-height:1.85;overflow-wrap:anywhere}.content h2{font-size:clamp(29px,4vw,39px);margin:2em 0 .5em}.content h3{font-size:26px;margin:1.7em 0 .5em}.content h4{font-size:21px;margin:1.5em 0 .5em}.content p{margin:0 0 1.3em}.content ul,.content ol{padding-left:1.5em;margin:0 0 1.5em}.content li{margin:.4em 0}.content a{text-decoration:underline;text-underline-offset:3px}.content blockquote{margin:2em 0;border-left:4px solid var(--sand);padding:.4em 1.3em;background:var(--white);border-radius:0 12px 12px 0}.content img{border-radius:14px;margin:1.4em auto}.content figure{margin:1.8em 0}.content figcaption{color:var(--sage);font-size:14px}.content table{display:block;overflow-x:auto;border-collapse:collapse;width:100%;margin:1.5em 0}.content th,.content td{border:1px solid #1e3b2e30;padding:10px 14px;text-align:left}.content th{background:var(--paper-soft)}.content pre{overflow-x:auto;padding:18px;background:var(--forest-deep);color:var(--white);border-radius:12px}.content hr{border:0;border-top:1px solid #1e3b2e30;margin:2em 0}.sitefoot{background:var(--forest-deep);color:var(--paper);padding:34px 0}.sitefoot .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.sitefoot a{color:var(--paper)}@media(max-width:600px){.sitehead img{width:115px}.sitehead nav{gap:12px;font-size:12px}.intro{padding-top:48px}.article{padding-top:42px}.content{font-size:16px}}
 `;
-function page(title, description, canonical, main) {
-  return `${marker}\n<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${escape(canonical)}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>${stylesheet}</style><script src="https://px.get-ryze.ai/px.js?key=rz_pk_2611c15723a78b835e45129619f53927"></script></head><body><header class="sitehead"><div class="wrap"><a href="/" aria-label="Peak Hair Restoration home"><img src="/assets/peak-logo-2x.png" alt="Peak Hair Restoration"></a><nav><a href="/">Home</a><a href="/blog">Articles</a><a href="/#contact">Free consultation</a></nav></div></header><main>${main}</main><footer class="sitefoot"><div class="wrap"><span>Peak Hair Restoration</span><a href="/#contact">Request an assessment</a><a href="/patient-policies">Patient Policies</a><a href="/privacy-policy">Privacy Policy</a></div></footer></body></html>\n`;
+const defaultImage = `${origin}/assets/peak-og-1200x630.jpg`;
+const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+function seoHead({ title, description, canonical, type = 'website', image, schema }) {
+  const img = image || defaultImage;
+  const tags = [
+    `<meta name="robots" content="index, follow, max-image-preview:large">`,
+    `<meta property="og:site_name" content="Peak Hair Restoration">`,
+    `<meta property="og:type" content="${type}">`,
+    `<meta property="og:locale" content="en_US">`,
+    `<meta property="og:title" content="${escape(title)}">`,
+    `<meta property="og:description" content="${escape(description)}">`,
+    `<meta property="og:url" content="${escape(canonical)}">`,
+    `<meta property="og:image" content="${escape(img)}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:title" content="${escape(title)}">`,
+    `<meta name="twitter:description" content="${escape(description)}">`,
+    `<meta name="twitter:image" content="${escape(img)}">`
+  ];
+  if (schema) tags.push(jsonLd(schema));
+  return tags.join('');
+}
+const breadcrumb = items => ({ '@type': 'BreadcrumbList', itemListElement: items.map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })) });
+function page(title, description, canonical, main, seo = {}) {
+  return `${marker}\n<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${escape(canonical)}">${seoHead({ title, description, canonical, ...seo })}<link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>${stylesheet}</style><script src="https://px.get-ryze.ai/px.js?key=rz_pk_2611c15723a78b835e45129619f53927" defer></script></head><body><header class="sitehead"><div class="wrap"><a href="/" aria-label="Peak Hair Restoration home"><img src="/assets/peak-logo-2x.png" alt="Peak Hair Restoration"></a><nav><a href="/">Home</a><a href="/blog">Articles</a><a href="/#contact">Free consultation</a></nav></div></header><main>${main}</main><footer class="sitefoot"><div class="wrap"><span>Peak Hair Restoration</span><a href="/#contact">Request an assessment</a><a href="/patient-policies">Patient Policies</a><a href="/privacy-policy">Privacy Policy</a></div></footer></body></html>\n`;
 }
 await mkdir(target, { recursive: true });
 let files = [];
@@ -41,7 +63,13 @@ for (const article of articles) {
   const main = `<article class="article"><a class="back" href="/blog">← All articles</a><p class="eyebrow">Peak hair restoration · Insights</p><h1>${escape(title)}</h1>${article.excerpt ? `<p class="dek">${escape(article.excerpt)}</p>` : ''}${published ? `<time datetime="${published}">${published}</time>` : ''}${hero}<div class="content">${body_html}</div></article>`;
   const filename = `${slug}.html`;
   expected.add(filename);
-  await writeFile(path.join(target, filename), page(article.meta_title || title, description, url(slug), main));
+  const pageTitle = article.meta_title || title;
+  const modified = date(article.updated_at) || published;
+  const schema = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'BlogPosting', headline: title, description, url: url(slug), mainEntityOfPage: url(slug), image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : defaultImage, ...(published ? { datePublished: published } : {}), ...(modified ? { dateModified: modified } : {}), author: { '@type': 'Organization', name: 'Peak Hair Restoration', url: `${origin}/` }, publisher: { '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Peak Hair Restoration', logo: { '@type': 'ImageObject', url: `${origin}/assets/peak-logo-2x.png` } } },
+    breadcrumb([['Home', `${origin}/`], ['Blog', `${origin}/blog`], [title, url(slug)]])
+  ] };
+  await writeFile(path.join(target, filename), page(pageTitle, description, url(slug), main, { type: 'article', image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : null, schema }));
 }
 const cards = articles.map(article => {
   const imageUrl = article.image && typeof article.image === 'object' ? article.image.url : null;
@@ -49,7 +77,28 @@ const cards = articles.map(article => {
   return `<article class="card">${image}<div class="inner"><span class="eyebrow">${escape(date(article.published_at) || 'Insights')}</span><h2><a href="/blog/${escape(article.slug)}">${escape(article.title)}</a></h2><p>${escape(article.excerpt || article.meta_description || '')}</p><a href="/blog/${escape(article.slug)}">Read article →</a></div></article>`;
 }).join('');
 const listing = `<div class="wrap"><section class="intro"><span class="eyebrow">Insights · Peak Hair Restoration</span><h1>Clear answers about hair restoration.</h1><p>Practical guidance on your options, natural-looking results and what to expect from a medical assessment.</p></section><section class="cards" aria-label="Articles">${cards || '<p>Articles are coming soon.</p>'}</section></div>`;
-await writeFile(path.join(target, 'index.html'), page('Hair Restoration Articles | Peak Hair Restoration', 'Guidance on hair transplants and restoration treatments from Peak Hair Restoration.', `${origin}/blog`, listing));
+const blogDescription = 'Patient guides on hair transplants, FUE, DHI, PRP, recovery and hairline design from Peak Hair Restoration in New York and Istanbul.';
+await writeFile(path.join(target, 'index.html'), page('Hair Restoration Articles | Peak Hair Restoration', blogDescription, `${origin}/blog`, listing, { schema: { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'Blog', name: 'Peak Hair Restoration Articles', url: `${origin}/blog`, description: blogDescription, blogPost: articles.map(a => ({ '@type': 'BlogPosting', headline: a.title, url: url(a.slug), ...(date(a.published_at) ? { datePublished: date(a.published_at) } : {}) })) },
+  breadcrumb([['Home', `${origin}/`], ['Blog', `${origin}/blog`]])
+] } }));
+
+// Sitemap: static pages + every published article, so new Ryze posts are always listed.
+const staticPages = [
+  ['/', 'index.html', 'weekly', '1.0'], ['/fue', 'fue.html', 'monthly', '0.9'], ['/dhi-hair-transplant', 'dhi-hair-transplant.html', 'monthly', '0.9'],
+  ['/prp-hair-restoration', 'prp-hair-restoration.html', 'monthly', '0.9'], ['/stem-cell-hair-therapy', 'stem-cell-hair-therapy.html', 'monthly', '0.8'],
+  ['/new-york-hair-transplant', 'new-york-hair-transplant.html', 'monthly', '0.9'], ['/istanbul-hair-transplant', 'istanbul-hair-transplant.html', 'monthly', '0.9'],
+  ['/pre-op-checklist', 'pre-op-checklist.html', 'monthly', '0.8'], ['/post-op-guide', 'post-op-guide.html', 'monthly', '0.8'],
+  ['/patient-policies', 'patient-policies.html', 'yearly', '0.3'], ['/privacy-policy', 'privacy-policy.html', 'yearly', '0.3']
+];
+const lastmodFile = path.resolve('scripts/sitemap-lastmod.json');
+let lastmods = {};
+try { lastmods = JSON.parse(await readFile(lastmodFile, 'utf8')); } catch {}
+const newestArticle = articles.map(a => date(a.updated_at) || date(a.published_at)).filter(Boolean).sort().pop() || '';
+const entries = staticPages.map(([loc, file, freq, pri]) => [`${origin}${loc === '/' ? '/' : loc}`, lastmods[file] || '', freq, pri]);
+entries.splice(entries.length - 2, 0, [`${origin}/blog`, newestArticle, 'weekly', '0.8'], ...articles.map(a => [url(a.slug), date(a.updated_at) || date(a.published_at), 'monthly', '0.7']));
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.map(([loc, mod, freq, pri]) => `  <url><loc>${loc}</loc>${mod ? `<lastmod>${mod}</lastmod>` : ''}<changefreq>${freq}</changefreq><priority>${pri}</priority></url>`).join('\n')}\n</urlset>\n`;
+await writeFile(path.resolve('public/sitemap.xml'), sitemap);
 for (const file of await readdir(target)) {
   if (!file.endsWith('.html') || expected.has(file)) continue;
   if ((await readFile(path.join(target, file), 'utf8')).startsWith(marker)) await unlink(path.join(target, file));
