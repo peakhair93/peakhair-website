@@ -88,6 +88,7 @@ const staticPages = [
   ['/', 'index.html', 'weekly', '1.0'], ['/fue', 'fue.html', 'monthly', '0.9'], ['/dhi-hair-transplant', 'dhi-hair-transplant.html', 'monthly', '0.9'],
   ['/prp-hair-restoration', 'prp-hair-restoration.html', 'monthly', '0.9'], ['/stem-cell-hair-therapy', 'stem-cell-hair-therapy.html', 'monthly', '0.8'],
   ['/new-york-hair-transplant', 'new-york-hair-transplant.html', 'monthly', '0.9'], ['/istanbul-hair-transplant', 'istanbul-hair-transplant.html', 'monthly', '0.9'],
+  ['/sapphire-fue-hair-transplant-nyc', 'sapphire-fue-hair-transplant-nyc.html', 'monthly', '0.9'], ['/hair-transplant-cost-nyc', 'hair-transplant-cost-nyc.html', 'monthly', '0.9'],
   ['/pre-op-checklist', 'pre-op-checklist.html', 'monthly', '0.8'], ['/post-op-guide', 'post-op-guide.html', 'monthly', '0.8'],
   ['/patient-policies', 'patient-policies.html', 'yearly', '0.3'], ['/privacy-policy', 'privacy-policy.html', 'yearly', '0.3']
 ];
