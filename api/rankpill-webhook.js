@@ -1,6 +1,10 @@
 export default async function handler(request, response) {
+  if (request.method === 'GET') {
+    return response.status(200).json({ status: 'ready' });
+  }
+
   if (request.method !== 'POST') {
-    response.setHeader('Allow', 'POST');
+    response.setHeader('Allow', 'GET, POST');
     return response.status(405).json({ error: 'Method Not Allowed' });
   }
 
