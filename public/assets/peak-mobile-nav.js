@@ -11,10 +11,10 @@
   const style = document.createElement('style');
   style.textContent = `
 .peak-phone-toggle,.peak-phone-nav{display:none}
+@media(max-width:600px){.peak-phone-header .nav-cta{display:none!important}}
 @media(max-width:1120px){
   header.peak-phone-header{z-index:100;overflow:visible}
   .peak-phone-header .menu-btn{display:none!important}
-  @media(max-width:600px){.peak-phone-header .nav-cta{display:none!important}}
   .peak-phone-header .nav{min-height:68px;gap:12px}
   .peak-phone-header .peak-desktop-nav,.peak-phone-header .mobile-cta{display:none!important}
   .peak-phone-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:88px;min-height:44px;margin-left:auto;padding:10px 14px;border:1px solid #233a2b40;border-radius:999px;background:#fcfaf4;color:#233a2b;font:600 14px/1.3 Inter,Arial,sans-serif;cursor:pointer;flex-shrink:0}
