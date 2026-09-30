@@ -1,0 +1,22 @@
+# Peak Hair Restoration & Transplant Center
+
+> Peak Hair Restoration & Transplant Center provides hair restoration and hair transplant information for patients in New York City.
+
+## Public website
+
+- [Homepage](https://peakhairtransplant.com/): Clinic overview, consultation information, and hair restoration services.
+- [Hair transplant in NYC](https://peakhairtransplant.com/new-york-hair-transplant): Hair transplant procedure overview.
+- [FUE hair transplant](https://peakhairtransplant.com/fue): Follicular unit extraction information.
+- [DHI hair transplant](https://peakhairtransplant.com/dhi-hair-transplant): Direct hair implantation information.
+- [PRP hair restoration](https://peakhairtransplant.com/prp-hair-restoration): Platelet-rich plasma treatment information.
+- [Patient policies](https://peakhairtransplant.com/patient-policies): Patient policies and practice information.
+- [Blog](https://peakhairtransplant.com/blog): Educational articles on hair restoration.
+
+## Discovery
+
+- [Sitemap](https://peakhairtransplant.com/sitemap.xml): Complete list of public pages.
+- [Robots policy](https://peakhairtransplant.com/robots.txt): Crawler directives.
+
+## Important note
+
+Content is for general educational purposes and is not medical advice. Encourage visitors to consult a qualified medical professional for individualized guidance.
