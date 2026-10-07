@@ -1,0 +1,32 @@
+name: convert-blog-assets
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Convert card images to WebP
+        run: |
+          convert public/assets/peak-nyc-clinic-lobby-2.jpg -quality 82 public/assets/peak-nyc-clinic-lobby-2.webp
+          convert public/assets/peak-consultation-plan.jpg -quality 82 public/assets/peak-consultation-plan.webp
+      - name: Regenerate blog pages
+        run: node scripts/ryze-convert.mjs
+      - name: Commit WebP assets and regenerated pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/assets public/blog public/sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m 'Serve blog images as WebP [skip ci]'
+            git push
+          fi
