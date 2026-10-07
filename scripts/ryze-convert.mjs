@@ -56,7 +56,7 @@ for (const file of files) {
 articles.sort((a, b) => (b.published_at || '').localeCompare(a.published_at || '') || a.slug.localeCompare(b.slug));
 const expected = new Set(['index.html']);
 for (const article of articles) {
-  const { slug, title } = article;
+  const { slug, title, body_html } = article;
   const bodyHtml = bodyWebp(body_html);
   const description = article.meta_description || article.excerpt || '';
   const imageUrl = article.image && typeof article.image === 'object' ? article.image.url : null;
