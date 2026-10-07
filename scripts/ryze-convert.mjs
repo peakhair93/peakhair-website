@@ -69,10 +69,10 @@ for (const article of articles) {
   const pageTitle = article.meta_title || title;
   const modified = date(article.updated_at) || published;
   const schema = { '@context': 'https://schema.org', '@graph': [
-    { '@type': 'BlogPosting', headline: title, description, url: url(slug), mainEntityOfPage: url(slug), image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : defaultImage, ...(published ? { datePublished: published } : {}), ...(modified ? { dateModified: modified } : {}), author: { '@type': 'Organization', name: 'Peak Hair Restoration & Transplant Center', url: `${origin}/` }, publisher: { '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Peak Hair Restoration & Transplant Center', logo: { '@type': 'ImageObject', url: `${origin}/assets/peak-logo-2x.png` } } },
+    { '@type': 'BlogPosting', headline: title, description, url: url(slug), mainEntityOfPage: url(slug), image: imageUrl && /^https:\/\//i.test(imageUrl) ? webp(imageUrl) : defaultImage, ...(published ? { datePublished: published } : {}), ...(modified ? { dateModified: modified } : {}), author: { '@type': 'Organization', name: 'Peak Hair Restoration & Transplant Center', url: `${origin}/` }, publisher: { '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Peak Hair Restoration & Transplant Center', logo: { '@type': 'ImageObject', url: `${origin}/assets/peak-logo-2x.png` } } },
     breadcrumb([['Home', `${origin}/`], ['Blog', `${origin}/blog`], [title, url(slug)]])
   ] };
-  await writeFile(path.join(target, filename), page(pageTitle, description, url(slug), main, { type: 'article', image: imageUrl && /^https:\/\//i.test(imageUrl) ? imageUrl : null, schema }));
+  await writeFile(path.join(target, filename), page(pageTitle, description, url(slug), main, { type: 'article', image: imageUrl && /^https:\/\//i.test(imageUrl) ? webp(imageUrl) : null, schema }));
 }
 const cards = articles.map(article => {
   const imageUrl = article.image && typeof article.image === 'object' ? article.image.url : null;
