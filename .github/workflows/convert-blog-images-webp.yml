@@ -26,13 +26,16 @@ jobs:
               ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-3-1790781337271.jpg', 'cost-in-hair-transplant-inline-3.webp'),
               ('https://www.peakhairtransplant.com/assets/peak-nyc-clinic-lobby-2.jpg', 'peak-nyc-clinic-lobby-2.webp'),
               ('https://www.peakhairtransplant.com/assets/peak-consultation-plan.jpg', 'peak-consultation-plan.webp'),
+              ('https://www.peakhairtransplant.com/assets/peak-logo-2x.png', 'peak-logo-2x.webp'),
           ]
           os.makedirs('public/assets/blog', exist_ok=True)
           for source, filename in images:
               with urllib.request.urlopen(source, timeout=60) as response:
                   raw = response.read(15000000)
               image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
-              if image.mode not in ('RGB', 'RGBA'):
+              if image.mode in ('P', 'LA') or 'transparency' in image.info:
+                  image = image.convert('RGBA')
+              elif image.mode not in ('RGB', 'RGBA'):
                   image = image.convert('RGB')
               path = 'public/assets/blog/' + filename
               image.save(path, 'WEBP', quality=82, method=6)
