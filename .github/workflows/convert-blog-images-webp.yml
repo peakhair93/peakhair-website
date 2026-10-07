@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -22,6 +24,8 @@ jobs:
               ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-1-1790781337293.jpg', 'cost-in-hair-transplant-inline-1.webp'),
               ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-2-1790781337275.jpg', 'cost-in-hair-transplant-inline-2.webp'),
               ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-3-1790781337271.jpg', 'cost-in-hair-transplant-inline-3.webp'),
+              ('https://www.peakhairtransplant.com/assets/peak-nyc-clinic-lobby-2.jpg', 'peak-nyc-clinic-lobby-2.webp'),
+              ('https://www.peakhairtransplant.com/assets/peak-consultation-plan.jpg', 'peak-consultation-plan.webp'),
           ]
           os.makedirs('public/assets/blog', exist_ok=True)
           for source, filename in images:
@@ -34,13 +38,18 @@ jobs:
               image.save(path, 'WEBP', quality=82, method=6)
               print('Saved', path, image.size)
           PY
-      - name: Commit WebP images
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regenerate blog pages
+        run: node scripts/ryze-convert.mjs
+      - name: Commit WebP images and regenerated pages
         run: |
           git config user.name 'Peak Image Convert'
           git config user.email 'image-convert@users.noreply.github.com'
-          git add public/assets/blog
+          git add public/assets/blog public/blog public/sitemap.xml
           if ! git diff --cached --quiet; then
-            git commit -m 'Convert cost-in-hair-transplant images to WebP'
+            git commit -m 'Serve blog images as WebP and regenerate pages'
             git push
           else
             echo 'Nothing to commit'
