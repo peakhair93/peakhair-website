@@ -15,7 +15,7 @@ jobs:
       - name: Crop photos without poster graphics
         run: |
           python - <<'PY'
-          from PIL import Image
+          from PIL import Image, ImageOps
           for count, boxes in [
             (2500, [(40,280,500,770),(525,280,983,770)]),
             (3000, [(28,245,500,775),(525,245,995,775)]),
@@ -25,9 +25,9 @@ jobs:
             panels=[]
             for box in boxes:
               scaled=tuple(round(v*d/1024) for v,d in zip(box,(im.width,im.height,im.width,im.height)))
-              panels.append(im.crop(scaled).resize((460,490),Image.Resampling.LANCZOS))
-            out=Image.new('RGB',(920,490))
-            out.paste(panels[0],(0,0)); out.paste(panels[1],(460,0))
+              panels.append(ImageOps.fit(im.crop(scaled),(380,570),method=Image.Resampling.LANCZOS,centering=(0.5,0.5)))
+            out=Image.new('RGB',(760,570))
+            out.paste(panels[0],(0,0)); out.paste(panels[1],(380,0))
             out.save(f'public/assets/peak-result-{count}-gallery.jpg',quality=95,optimize=True)
           PY
       - name: Save gallery crops
