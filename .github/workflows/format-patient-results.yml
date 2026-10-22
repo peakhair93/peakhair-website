@@ -1,0 +1,39 @@
+name: Format patient results
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - name: Crop photos without poster graphics
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          for count, boxes in [
+            (2500, [(40,280,500,770),(525,280,983,770)]),
+            (3000, [(28,245,500,775),(525,245,995,775)]),
+            (4100, [(40,280,498,770),(525,280,985,770)])
+          ]:
+            im=Image.open(f'public/assets/peak-result-{count}-6-months.jpg').convert('RGB')
+            panels=[]
+            for box in boxes:
+              scaled=tuple(round(v*d/1024) for v,d in zip(box,(im.width,im.height,im.width,im.height)))
+              panels.append(im.crop(scaled).resize((460,490),Image.Resampling.LANCZOS))
+            out=Image.new('RGB',(920,490))
+            out.paste(panels[0],(0,0)); out.paste(panels[1],(460,0))
+            out.save(f'public/assets/peak-result-{count}-gallery.jpg',quality=95,optimize=True)
+          PY
+      - name: Save gallery crops
+        run: |
+          git config user.name 'Peak Gallery Import'
+          git config user.email 'gallery-import@users.noreply.github.com'
+          git add public/assets/peak-result-*-gallery.jpg
+          git commit -m 'Match three patient photos to before-and-after gallery format'
+          git push
