@@ -4,6 +4,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/treatments/stem-cel",
+      "destination": "/stem-cell-hair-therapy",
+      "permanent": true
+    },
+    {
       "source": "/terms",
       "destination": "/patient-policies",
       "permanent": true
