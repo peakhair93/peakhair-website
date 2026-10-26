@@ -4,8 +4,8 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/treatments/stem-cel",
-      "destination": "/",
+      "source": "/treatments/stem-cell",
+      "destination": "/prp-hair-restoration",
       "permanent": true
     },
     {
