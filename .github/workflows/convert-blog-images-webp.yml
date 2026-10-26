@@ -20,16 +20,23 @@ jobs:
           import glob, io, json, os, urllib.request
           from PIL import Image, ImageOps
 
+          failed = []
+
           def save_webp(source, path):
-              with urllib.request.urlopen(source, timeout=60) as response:
-                  raw = response.read(20000000)
-              image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
-              if image.mode in ('P', 'LA') or 'transparency' in image.info:
-                  image = image.convert('RGBA')
-              elif image.mode not in ('RGB', 'RGBA'):
-                  image = image.convert('RGB')
-              image.save(path, 'WEBP', quality=82, method=6)
-              print('Saved', path, image.size)
+              try:
+                  request = urllib.request.Request(source, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'})
+                  with urllib.request.urlopen(request, timeout=60) as response:
+                      raw = response.read(20000000)
+                  image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
+                  if image.mode in ('P', 'LA') or 'transparency' in image.info:
+                      image = image.convert('RGBA')
+                  elif image.mode not in ('RGB', 'RGBA'):
+                      image = image.convert('RGB')
+                  image.save(path, 'WEBP', quality=82, method=6)
+                  print('Saved', path, image.size)
+              except Exception as error:
+                  failed.append((source, path, str(error)))
+                  print('FAILED', source, '->', path, ':', error)
 
           os.makedirs('public/assets/blog', exist_ok=True)
           os.makedirs('public/assets', exist_ok=True)
@@ -54,6 +61,11 @@ jobs:
           pexels = [('https://images.pexels.com/photos/28764621/pexels-photo-28764621.jpeg?auto=compress&cs=tinysrgb&w=900', 'pexels-28764621.webp'), ('https://images.pexels.com/photos/18388935/pexels-photo-18388935.jpeg?auto=compress&cs=tinysrgb&w=900', 'pexels-18388935.webp'), ('https://images.pexels.com/photos/34650327/pexels-photo-34650327.jpeg?auto=compress&cs=tinysrgb&w=900', 'pexels-34650327.webp'), ('https://images.pexels.com/videos/6235749/pexels-photo-6235749.jpeg?auto=compress&w=1400', 'pexels-6235749-poster.webp')]
           for source, name in pexels:
               save_webp(source, 'public/assets/' + name)
+
+          if failed:
+              print('SUMMARY-FAILED:', json.dumps(failed))
+          if len(failed) > 6:
+              raise SystemExit('Too many failed downloads')
           PY
       - uses: actions/setup-node@v4
         with:
