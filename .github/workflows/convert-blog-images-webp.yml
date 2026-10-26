@@ -1,4 +1,4 @@
-name: Convert blog images to WebP
+name: Convert site images to WebP
 on:
   workflow_dispatch:
 permissions:
@@ -13,33 +13,47 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Convert article images to WebP
+      - name: Convert images to WebP
         run: |
           python -m pip install pillow
           python - <<'PY'
-          import io, os, urllib.request
+          import glob, io, json, os, urllib.request
           from PIL import Image, ImageOps
-          images = [
-              ('https://gwvckixiegkllthleuyt.supabase.co/storage/v1/object/public/workspace-article-images-public/966c4cb6-846a-4923-8960-b53ef4c3eebd/featured.jpg', 'cost-in-hair-transplant-featured.webp'),
-              ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-1-1790781337293.jpg', 'cost-in-hair-transplant-inline-1.webp'),
-              ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-2-1790781337275.jpg', 'cost-in-hair-transplant-inline-2.webp'),
-              ('https://xqvnmkjynbkcujcrtubi.supabase.co/storage/v1/object/public/article-images/8d5b7c26-a99e-464b-849f-a838434fe9dc/inline-3-1790781337271.jpg', 'cost-in-hair-transplant-inline-3.webp'),
-              ('https://www.peakhairtransplant.com/assets/peak-nyc-clinic-lobby-2.jpg', 'peak-nyc-clinic-lobby-2.webp'),
-              ('https://www.peakhairtransplant.com/assets/peak-consultation-plan.jpg', 'peak-consultation-plan.webp'),
-              ('https://www.peakhairtransplant.com/assets/peak-logo-2x.png', 'peak-logo-2x.webp'),
-          ]
-          os.makedirs('public/assets/blog', exist_ok=True)
-          for source, filename in images:
+
+          def save_webp(source, path):
               with urllib.request.urlopen(source, timeout=60) as response:
-                  raw = response.read(15000000)
+                  raw = response.read(20000000)
               image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
               if image.mode in ('P', 'LA') or 'transparency' in image.info:
                   image = image.convert('RGBA')
               elif image.mode not in ('RGB', 'RGBA'):
                   image = image.convert('RGB')
-              path = 'public/assets/blog/' + filename
               image.save(path, 'WEBP', quality=82, method=6)
               print('Saved', path, image.size)
+
+          os.makedirs('public/assets/blog', exist_ok=True)
+          os.makedirs('public/assets', exist_ok=True)
+
+          seen = set()
+          for filename in sorted(glob.glob('blog/data/*.json')):
+              with open(filename) as fh:
+                  article = json.load(fh)
+              if article.get('status') != 'published':
+                  continue
+              image = article.get('image') or {}
+              source = image.get('url') if isinstance(image, dict) else None
+              if not source or source in seen:
+                  continue
+              seen.add(source)
+              save_webp(source, 'public/assets/blog/' + article['slug'] + '-featured.webp')
+
+          local = ['peak-logo-2x.png', 'peak-hero-poster.jpg', 'peak-ba-1.jpg', 'peak-ba-2.jpg', 'peak-ba-3.jpg', 'peak-ba-4.jpg', 'peak-ba-5.jpg', 'peak-ba-6.jpg', 'peak-ba-7.jpg', 'peak-ba-8.jpg', 'peak-result-2500-gallery.jpg', 'peak-result-3000-gallery.jpg', 'peak-result-4100-gallery.jpg', 'peak-consultation-plan.jpg', 'peak-nyc-clinic-lobby.jpg', 'peak-nyc-clinic-lobby-2.jpg', 'peak-nyc-clinic-room-1.jpg', 'peak-nyc-clinic-room-3.jpg', 'peak-nyc-clinic-room-4.jpg', 'peak-nyc-clinic-room-5.jpg', 'peak-nyc-clinic-kitchen-1.jpg', 'peak-nyc-clinic-kitchen-2.jpg', 'peak-nyc-aftercare-products.jpg']
+          for name in local:
+              save_webp('https://www.peakhairtransplant.com/assets/' + name, 'public/assets/' + name.rsplit('.', 1)[0] + '.webp')
+
+          pexels = [('https://images.pexels.com/photos/28764621/pexels-photo-28764621.jpeg?auto=compress&cs=tinysrgb&w=900', 'pexels-28764621.webp'), ('https://images.pexels.com/photos/18388935/pexels-photo-18388935.jpeg?auto=compress&cs=tinysrgb&w=900', 'pexels-18388935.webp'), ('https://images.pexels.com/photos/34650327/pexels-photo-34650327.jpeg?auto=compress&cs=tinysrgb&w=900', 'pexels-34650327.webp'), ('https://images.pexels.com/videos/6235749/pexels-photo-6235749.jpeg?auto=compress&w=1400', 'pexels-6235749-poster.webp')]
+          for source, name in pexels:
+              save_webp(source, 'public/assets/' + name)
           PY
       - uses: actions/setup-node@v4
         with:
@@ -50,9 +64,9 @@ jobs:
         run: |
           git config user.name 'Peak Image Convert'
           git config user.email 'image-convert@users.noreply.github.com'
-          git add public/assets/blog public/blog public/sitemap.xml
+          git add public/assets public/blog public/sitemap.xml
           if ! git diff --cached --quiet; then
-            git commit -m 'Serve blog images as WebP and regenerate pages'
+            git commit -m 'Serve site images as WebP and regenerate blog pages'
             git push
           else
             echo 'Nothing to commit'
