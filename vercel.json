@@ -5,7 +5,12 @@
   "redirects": [
     {
       "source": "/treatments/stem-cel",
-      "destination": "/stem-cell-hair-therapy",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/stem-cell-hair-therapy",
+      "destination": "/",
       "permanent": true
     },
     {
