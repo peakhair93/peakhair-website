@@ -7,85 +7,31 @@ jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out site
+        uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Convert legacy images to WebP
         run: |
           python -m pip install pillow
-          python - <<'PY'
-          import io, json, os, re, urllib.request
-          from pathlib import Path
-          from PIL import Image, ImageOps
-          def save_webp(raw, dst):
-              image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
-              if image.mode in ('P', 'LA') or 'transparency' in image.info:
-                  image = image.convert('RGBA')
-              elif image.mode not in ('RGB', 'RGBA'):
-                  image = image.convert('RGB')
-              image.save(dst, 'WEBP', quality=82, method=6)
-              print('saved', dst, image.size)
-          def fetch(url):
-              request = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; PeakImageConvert/1.0)'})
-              with urllib.request.urlopen(request, timeout=60) as response:
-                  return response.read(15000000)
-          root = Path('public/assets')
-          os.makedirs(root, exist_ok=True)
-          local = [
-              'peak-ba-1.jpg', 'peak-ba-2.jpg', 'peak-ba-3.jpg', 'peak-ba-4.jpg',
-              'peak-ba-5.jpg', 'peak-ba-6.jpg', 'peak-ba-7.jpg', 'peak-ba-8.jpg',
-              'peak-result-2500-gallery.jpg', 'peak-result-3000-gallery.jpg', 'peak-result-4100-gallery.jpg',
-              'peak-nyc-clinic-lobby.jpg', 'peak-nyc-clinic-lobby-2.jpg', 'peak-nyc-clinic-room-5.jpg',
-              'peak-nyc-clinic-room-1.jpg', 'peak-nyc-clinic-room-3.jpg', 'peak-nyc-clinic-room-4.jpg',
-              'peak-nyc-clinic-kitchen-1.jpg', 'peak-nyc-clinic-kitchen-2.jpg', 'peak-nyc-aftercare-products.jpg',
-              'peak-hero-poster.jpg', 'peak-consultation-plan.jpg', 'peak-logo-2x.png',
-          ]
-          for name in local:
-              src = root / name
-              dst = root / (src.stem + '.webp')
-              if dst.exists():
-                  print('exists', dst)
-                  continue
-              if not src.exists():
-                  print('missing', src)
-                  continue
-              save_webp(src.read_bytes(), dst)
-          remote = [
-              ('https://images.pexels.com/photos/28764621/pexels-photo-28764621.jpeg?auto=compress&cs=tinysrgb&w=900', 'peak-loc-istanbul.webp'),
-              ('https://images.pexels.com/photos/18388935/pexels-photo-18388935.jpeg?auto=compress&cs=tinysrgb&w=900', 'peak-loc-nyc.webp'),
-              ('https://images.pexels.com/photos/34650327/pexels-photo-34650327.jpeg?auto=compress&cs=tinysrgb&w=900', 'peak-loc-miami.webp'),
-          ]
-          for source, filename in remote:
-              dst = root / filename
-              if dst.exists():
-                  print('exists', dst)
-                  continue
-              save_webp(fetch(source), dst)
-          blogdir = Path('blog/data')
-          os.makedirs('public/assets/blog', exist_ok=True)
-          pattern = re.compile(r'^https://[^/]*supabase\.co/storage/', re.I)
-          for jsonfile in sorted(blogdir.glob('*.json')):
-              article = json.loads(jsonfile.read_text(encoding='utf-8'))
-              image = article.get('image') or {}
-              url = image.get('url') if isinstance(image, dict) else None
-              if not url or not pattern.match(url):
-                  continue
-              dst = Path('public/assets/blog') / (article['slug'] + '-featured.webp')
-              if dst.exists():
-                  print('exists', dst)
-                  continue
-              save_webp(fetch(url), dst)
-          PY
-      - name: Commit WebP assets
+          python scripts/rewrite-images.py
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regenerate blog pages
+        run: node scripts/ryze-convert.mjs
+      - name: Commit WebP assets and regenerated pages
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/assets
+          git add public/assets public/index.html public/blog public/sitemap.xml
           if ! git diff --cached --quiet; then
-            git commit -m 'Convert legacy images to WebP'
+            git commit -m 'Serve legacy images as WebP [skip ci]'
             git push
           else
             echo 'Nothing to commit'
