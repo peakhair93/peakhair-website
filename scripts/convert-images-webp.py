@@ -6,7 +6,6 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 ROOT = Path('.')
-KEEP_AS_JPEG = {'assets/peak-og-1200x630.jpg'}
 
 def fetch(url):
     request = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; PeakSiteImageConverter/1.0)'})
@@ -23,28 +22,37 @@ def save_webp(raw, dest):
     image.save(dest, 'WEBP', quality=82, method=6)
     print('saved', dest.as_posix())
 
-# 1. Homepage: every legacy-format asset the page references (img src, video
-#    poster, JSON-LD image URLs) becomes a local WebP and the reference is
-#    rewritten. The social preview image (peak-og-1200x630.jpg) stays JPEG on
-#    purpose for maximum link-preview compatibility.
+# 1. Homepage: every legacy-format image reference on the page (img src, video
+#    poster, og/twitter preview tags, JSON-LD image URLs) gets a local WebP
+#    twin and the reference is rewritten to it. Nothing stays in JPEG/PNG.
 html = (ROOT / 'public' / 'index.html').read_text(encoding='utf-8')
-legacy = re.compile(r'(?:assets|https://(?!(?:www\.)?peakhairtransplant\.com))[^"\s<>]+\.(?:jpe?g|png)(?:\?[^"\s<>]*)?', re.I)
+legacy = re.compile(r'(?:https?://[^"\s<>]+|/?assets/[^"\s<>]+)\.(?:jpe?g|png)(?:\?[^"\s<>]*)?', re.I)
 mapping = {}
 for raw_ref in sorted(set(legacy.findall(html))):
     path_part = raw_ref.split('?')[0].replace('&amp;', '&')
     if path_part.startswith(('http://', 'https://')):
         if 'peakhairtransplant.com' in path_part:
-            continue
-        name = re.sub(r'[^a-z0-9]+', '-', Path(path_part).stem.lower()).strip('-')[-60:]
-        dest = ROOT / 'public' / 'assets' / 'webp' / (name + '.webp')
-        if not dest.exists():
-            save_webp(fetch(path_part), dest)
-        mapping[raw_ref] = dest.relative_to(ROOT).as_posix()
+            rel = path_part.split('/', 3)[-1]
+            source = ROOT / 'public' / rel
+            if not source.exists():
+                print('missing local file, skipped:', path_part)
+                continue
+            dest = source.with_suffix('.webp')
+            if not dest.exists():
+                save_webp(source.read_bytes(), dest)
+            mapping[raw_ref] = path_part[:path_part.rfind('.')] + '.webp'
+        else:
+            name = re.sub(r'[^a-z0-9]+', '-', Path(path_part).stem.lower()).strip('-')[-60:]
+            dest = ROOT / 'public' / 'assets' / 'webp' / (name + '.webp')
+            try:
+                if not dest.exists():
+                    save_webp(fetch(path_part), dest)
+            except Exception as error:
+                print('FAILED', path_part, '->', error)
+                continue
+            mapping[raw_ref] = '/assets/webp/' + name + '.webp'
     else:
         path_part = path_part.lstrip('/')
-        if path_part in KEEP_AS_JPEG:
-            print('keeping social preview image as JPEG:', path_part)
-            continue
         source = ROOT / 'public' / path_part
         if not source.exists():
             print('missing local file, skipped:', path_part)
@@ -52,7 +60,7 @@ for raw_ref in sorted(set(legacy.findall(html))):
         dest = source.with_suffix('.webp')
         if not dest.exists():
             save_webp(source.read_bytes(), dest)
-        new_ref = dest.relative_to(ROOT).as_posix()
+        new_ref = path_part[:path_part.rfind('.')] + '.webp'
         mapping[raw_ref] = new_ref
         if raw_ref != path_part:
             mapping[path_part] = new_ref
@@ -73,7 +81,7 @@ for file in sorted((ROOT / 'blog' / 'data').glob('*.json')):
     source = (article.get('image') or {}).get('url') or ''
     if not source.startswith('http') or not re.search(r'\.(jpe?g|png)(\?|$)', source, re.I):
         continue
-    dest = ROOT / 'public' / 'assets' / 'blog' / (article['slug'] + '-featured.webp')
+    dest = ROOT / 'public' / 'assets' / 'blog' / (file.stem + '-featured.webp')
     if dest.exists():
         print('already converted:', dest.name)
         continue
