@@ -40,8 +40,37 @@ function seoHead({ title, description, canonical, type = 'website', image, schem
 const breadcrumb = items => ({ '@type': 'BreadcrumbList', itemListElement: items.map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })) });
 const blogContact = `<section class="blog-contact" aria-labelledby="blog-contact-title"><div class="wrap"><div class="blog-contact-card"><p class="eyebrow">Peak Hair Restoration</p><h2 id="blog-contact-title">Start with a conversation</h2><p>Request a free, no-obligation consultation, or message Peak’s coordination team on WhatsApp about scheduling.</p><div class="blog-contact-actions"><a class="blog-contact-button" href="${origin}/#contact">Free consultation</a><a class="blog-contact-button blog-contact-whatsapp" href="https://wa.me/19172663038?text=Hello%20Peak%2C%20I%20would%20like%20to%20arrange%20a%20consultation." target="_blank" rel="noopener noreferrer">WhatsApp us ↗</a></div><p class="blog-contact-note">For scheduling only. Please do not send medical history, photos or payment details. A consultation request does not book an appointment.</p></div></div></section>`;
 const blogContactStyles = `.blog-contact{padding:0 0 64px}.blog-contact-card{background:var(--forest-deep);color:var(--paper);border-radius:24px;padding:40px}.blog-contact-card .eyebrow{color:var(--sand);margin:0 0 12px}.blog-contact-card h2{font-size:clamp(28px,4vw,40px);margin:0 0 16px;color:var(--paper)}.blog-contact-card p{max-width:700px}.blog-contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.blog-contact-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:32px;background:var(--paper);color:var(--forest-deep);font-size:15px;font-weight:600;text-decoration:none;border:1px solid var(--paper)}.blog-contact-button:hover{background:var(--sand);color:var(--forest-deep)}.blog-contact-button:focus-visible{outline:3px solid var(--sand);outline-offset:4px}.blog-contact-whatsapp{background:transparent;color:var(--paper)}.blog-contact-card .blog-contact-note{font-size:13px;line-height:1.6;color:var(--paper);margin-bottom:0}@media(max-width:600px){.blog-contact-card{padding:28px 22px}.blog-contact-actions{flex-direction:column}.blog-contact-button{width:100%}}`;
+const midBlogContact = blogContact.replace('class="blog-contact"', 'class="blog-contact blog-contact-mid"').replaceAll('blog-contact-title', 'blog-contact-mid-title');
+function addMidArticleContact(html) {
+  // Insert between complete blocks, never inside a paragraph, list or table.
+  const stack = [];
+  const headings = [];
+  const blocks = [];
+  const voidTags = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+  const tokens = /<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script\s*>|<style\b[^>]*>[\s\S]*?<\/style\s*>|<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+  for (const token of html.matchAll(tokens)) {
+    if (!token[1]) continue;
+    const tag = token[1].toLowerCase();
+    if (token[0].startsWith('</')) {
+      const index = stack.lastIndexOf(tag);
+      if (index !== -1) stack.length = index;
+      continue;
+    }
+    const safe = stack.every(parent => ['div', 'section', 'article'].includes(parent));
+    if (safe && token.index > html.length * 0.2 && token.index < html.length * 0.8) {
+      if (tag === 'h2') headings.push(token.index);
+      if (['h2','h3','p','section','div'].includes(tag)) blocks.push(token.index);
+    }
+    if (!voidTags.has(tag) && !token[0].endsWith('/>')) stack.push(tag);
+  }
+  const candidates = headings.length ? headings : blocks;
+  if (!candidates.length) throw new Error('No safe mid-article contact placement found');
+  const at = candidates.reduce((best, next) => Math.abs(next - html.length / 2) < Math.abs(best - html.length / 2) ? next : best);
+  return html.slice(0, at) + midBlogContact + html.slice(at);
+}
+const midContactStyles = `.content .blog-contact-mid{margin:44px 0;padding:0}.content .blog-contact-mid>.wrap{padding:0}.content .blog-contact-card h2{margin:0 0 16px;color:var(--paper);font-size:clamp(28px,4vw,36px)}.content .blog-contact-card .eyebrow{margin:0 0 12px}.content .blog-contact-card .blog-contact-note{margin:0}.content .blog-contact-button{color:var(--forest-deep);text-decoration:none}.content .blog-contact-whatsapp{color:var(--paper)}.content .blog-contact-button:hover{color:var(--forest-deep)}`;
 function page(title, description, canonical, main, seo = {}) {
-  return `${marker}\n<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${escape(canonical)}">${seoHead({ title, description, canonical, ...seo })}<link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>${stylesheet}${blogContactStyles}</style><script src="https://px.get-ryze.ai/px.js?key=rz_pk_2611c15723a78b835e45129619f53927" defer></script></head><body><header class="sitehead"><div class="wrap"><a href="/" aria-label="Peak Hair Restoration home"><img src="/assets/blog/peak-logo-2x.webp" alt="Peak Hair Restoration"></a><nav><a href="/">Home</a><a href="/blog">Articles</a><a href="/#contact">Free consultation</a></nav></div></header><main>${main}${blogContact}</main><footer class="sitefoot"><div class="wrap"><span>Peak Hair Restoration</span><a href="tel:+19175322001">(917) 532-2001</a><a href="/#contact">Request an assessment</a><a href="https://wa.me/19172663038" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="/patient-policies">Patient Policies</a><a href="/privacy-policy">Privacy Policy</a></div></footer></body></html>\n`;
+  return `${marker}\n<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${escape(canonical)}">${seoHead({ title, description, canonical, ...seo })}<link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>${stylesheet}${blogContactStyles}${midContactStyles}</style><script src="https://px.get-ryze.ai/px.js?key=rz_pk_2611c15723a78b835e45129619f53927" defer></script></head><body><header class="sitehead"><div class="wrap"><a href="/" aria-label="Peak Hair Restoration home"><img src="/assets/blog/peak-logo-2x.webp" alt="Peak Hair Restoration"></a><nav><a href="/">Home</a><a href="/blog">Articles</a><a href="/#contact">Free consultation</a></nav></div></header><main>${main}${blogContact}</main><footer class="sitefoot"><div class="wrap"><span>Peak Hair Restoration</span><a href="tel:+19175322001">(917) 532-2001</a><a href="/#contact">Request an assessment</a><a href="https://wa.me/19172663038" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="/patient-policies">Patient Policies</a><a href="/privacy-policy">Privacy Policy</a></div></footer></body></html>\n`;
 }
 await mkdir(target, { recursive: true });
 let files = [];
@@ -61,7 +90,7 @@ articles.sort((a, b) => (b.published_at || '').localeCompare(a.published_at || '
 const expected = new Set(['index.html']);
 for (const article of articles) {
   const { slug, title, body_html } = article;
-  const bodyHtml = bodyWebp(body_html);
+  const bodyHtml = addMidArticleContact(bodyWebp(body_html));
   const description = article.meta_description || article.excerpt || '';
   const imageUrl = article.image && typeof article.image === 'object' ? article.image.url : null;
   const imageAlt = article.image && typeof article.image === 'object' ? article.image.alt : '';
