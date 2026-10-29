@@ -1,0 +1,60 @@
+name: Publish single approved RankPill article
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: single-rankpill-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Import only the approved article
+        run: |
+          python - <<'PY'
+          import subprocess,json,re,datetime,pathlib
+          from zoneinfo import ZoneInfo
+          slug='hair-graft-before-and-after'
+          out=pathlib.Path('blog/data')/(slug+'.json')
+          assert not out.exists(), 'Article already imported; refusing duplicate'
+          now=datetime.datetime.now(datetime.timezone.utc)
+          today=now.astimezone(ZoneInfo('America/New_York')).date()
+          for p in pathlib.Path('blog/data').glob('*.json'):
+              a=json.loads(p.read_text())
+              if a.get('status')=='published' and a.get('published_at'):
+                  d=datetime.datetime.fromisoformat(a['published_at'].replace('Z','+00:00'))
+                  if d.tzinfo is None: d=d.replace(tzinfo=datetime.timezone.utc)
+                  assert d.astimezone(ZoneInfo('America/New_York')).date()!=today, 'Another article already published today'
+          body=subprocess.check_output(['git','show','origin/rankpill/single-article-transfer:blog/data/rankpill-source.html']).decode()
+          assert len(body)>18000 and body.count('<img ')==3 and 'Understanding Hair Grafts and Transplantation' in body and body.rstrip().endswith('</p>')
+          body=body.replace('using precision blades for recipient site creation that can improve healing and density outcomes.','using sapphire blades for recipient site creation. The blade material alone does not guarantee better healing or density.')
+          body=re.sub(r' \(\d+-\d+% of grafts\)','',body)
+          body=body.replace('At this stage, roughly half of the transplanted follicles have produced visible hair, allowing preliminary assessment of density distribution, hairline naturalness, and overall aesthetic direction.','At this stage, visible growth varies between patients, allowing a preliminary assessment of density distribution, hairline naturalness, and overall aesthetic direction. Six months is not a final result.')
+          body=body.replace('<li>Growth cycles synchronize with native hair</li>','<li>Individual follicles continue their own growth cycles</li>')
+          old='Some individuals continue seeing subtle improvements beyond twelve months, with full maturation occurring at eighteen to twenty-four months post-procedure.'
+          body=body.replace(old,'Some individuals continue seeing improvements beyond twelve months. The NHS gives a typical full-results window of ten to eighteen months.')
+          body=body.replace('notes that final density and appearance stabilize gradually as growth cycles complete their first full rotation.','provides additional information about male-pattern hair loss; it does not establish a precise transplant maturation timetable.')
+          body=body.replace('Patients often benefit from combining surgical transplantation with','Evidence for combining surgical transplantation with').replace('or other regenerative treatments designed to support both transplanted and native hair follicles. These complementary approaches may extend the longevity of overall results.','or other regenerative treatments remains limited. These approaches are not established guarantees of longer-lasting transplant results; discuss their evidence and risks with your surgeon.')
+          stamp=now.isoformat()
+          a={'title':'Hair Graft Before and After: Timeline and Results','slug':slug,'status':'published','meta_title':'Hair Graft Before and After: Timeline and Results','meta_description':'Explore hair graft before and after transformations. Learn about timelines, expectations, and realistic outcomes from hair transplant procedures.','body_html':body,'published_at':stamp,'updated_at':stamp,'source':'RankPill','source_article_id':'e7014ad3-c745-4e80-aea4-2c54866bf3ef'}
+          out.write_text(json.dumps(a,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render blog
+        run: node scripts/ryze-convert.mjs
+      - name: Commit only approved article and listing
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add blog/data/hair-graft-before-and-after.json public/blog/hair-graft-before-and-after.html public/blog/index.html public/sitemap.xml
+          git commit -m 'Publish approved RankPill hair graft timeline article'
+          git push origin HEAD:main
