@@ -30,6 +30,11 @@ jobs:
       - name: Prepare open-source English to Spanish model
         if: steps.model.outputs.cache-hit != 'true'
         run: ct2-transformers-converter --model Helsinki-NLP/opus-mt-en-es --output_dir .translation-model --quantization int8
+      - name: Reuse completed translations where available
+        run: |
+          if git fetch origin spanish/full-site-translation; then
+            git checkout FETCH_HEAD -- translations
+          fi
       - name: Translate full pages without shortening source content
         run: python -u scripts/full-spanish.py
       - name: Save translated draft for review
