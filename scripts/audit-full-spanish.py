@@ -31,5 +31,17 @@ for item in report:
   original=norm(en.get_text(' ',strip=True));translated=norm(es.get_text(' ',strip=True))
   if original!=translated:warnings.append({'page':item['spanish'],'type':kind,'english':original,'spanish':translated})
  print('PASS structure '+item['spanish'])
-print(json.dumps({'pages':len(report),'errors':errors,'numeric_terms_for_review':warnings},ensure_ascii=False,indent=2))
+from collections import Counter
+compact=[]
+for row in warnings:
+ a,b=Counter(row['english']),Counter(row['spanish'])
+ compact.append({'page':row['page'],'type':row['type'],'missing':dict(a-b),'additional':dict(b-a)})
+cache=json.loads(Path('translations/spanish-full-cache.json').read_text())
+examples=[]
+for source,target in cache.items():
+ if '$' in source and source.count('$')!=target.count('$'):
+  examples.append({'english':source,'spanish':target})
+result={'pages':len(report),'errors':errors,'numeric_terms_for_review':compact,'currency_translation_examples':examples}
+Path('translations/spanish-audit-results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+print(json.dumps({'pages':len(report),'errors':errors,'numeric_terms_for_review':compact,'currency_examples':len(examples)},ensure_ascii=False,indent=2))
 if errors:sys.exit(1)
