@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+:root{--paper:#f4f0e5;--cream:#fcfaf4;--forest:#233a2b;--deep:#15291f;--sage:#52695a;--sand:#a9c9aa}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;background:var(--paper);color:var(--forest);font:16px/1.75 Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--sage);outline-offset:5px}
+img{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+header{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid #233a2b25}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+.nav img{height:44px;width:auto}
+.links{display:flex;gap:24px;align-items:center;font-weight:600;font-size:14px}
+.links a{text-decoration:none}
+.links a:hover{text-decoration:underline}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.13;letter-spacing:-.025em;font-weight:500;text-wrap:balance}
+h1{font-size:clamp(40px,5vw,66px);margin:16px 0 24px;max-width:20ch}
+h2{font-size:clamp(30px,3.3vw,44px);margin:0 0 28px}
+h3{font-size:25px;margin:0 0 16px}
+p{margin:0 0 20px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.breadcrumbs{padding-top:24px;font-size:13px;color:var(--sage)}
+.hero{padding:48px 0 64px}
+.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:56px;align-items:center}
+.lead{font-size:20px;color:var(--sage)}
+.button{display:inline-block;padding:14px 24px;border-radius:40px;background:var(--forest);color:var(--cream);text-decoration:none;font-size:14px;font-weight:600}
+.button:hover{background:var(--deep)}
+.small{font-size:13px;color:var(--sage);margin-top:16px}
+.hero-panel{border:1px solid #233a2b30;border-radius:24px;padding:32px;background:var(--cream)}
+.hero-panel span{display:block;border-top:1px solid #233a2b20;padding-top:20px;margin-top:20px;color:var(--sage);font-size:15px}
+.hero-panel h2{font-size:32px}
+.jump{display:flex;gap:12px 24px;flex-wrap:wrap;padding:20px 0;border-top:1px solid #233a2b25;border-bottom:1px solid #233a2b25;font-size:14px;font-weight:600}
+.section{padding:64px 0}
+.alt{background:#eae4d6}
+.reading{max-width:850px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card{padding:28px;background:var(--cream);border:1px solid #233a2b20;border-radius:20px}
+.card p:last-child{margin-bottom:0}
+.steps{display:grid;gap:24px;counter-reset:step}
+.step{padding:28px;border-left:3px solid var(--sage);background:var(--cream);border-radius:0 18px 18px 0}
+.step p:last-child{margin-bottom:0}
+dl{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:0}
+dl div{padding:18px 0;border-top:1px solid #233a2b30}
+dt{font-weight:600;margin-bottom:6px}
+dd{margin:0;color:var(--sage)}
+.note{padding:28px;border-left:4px solid var(--sage);background:var(--cream);border-radius:0 18px 18px 0;margin-top:28px}
+.faq details{padding:20px 0;border-bottom:1px solid #233a2b30}
+.faq summary{cursor:pointer;font-weight:600;min-height:28px}
+.faq p{margin:16px 0 0;color:var(--sage)}
+.cta{padding:48px;background:var(--forest);color:var(--cream);border-radius:24px}
+.cta p{color:#e6eadf;max-width:750px}
+.cta .button{background:var(--cream);color:var(--forest)}
+.sources{font-size:13px;color:var(--sage)}
+footer{border-top:1px solid #233a2b25;padding:32px 0;font-size:14px;color:var(--sage)}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-panel{max-width:100%}.hero{padding:36px 0 44px}.section{padding:48px 0}.grid{grid-template-columns:1fr}.links{gap:12px;font-size:12px}}
+@media(max-width:600px){.wrap{padding:0 18px}.nav img{height:36px}.links{display:none}dl{grid-template-columns:1fr}.cta{padding:30px 24px}.card,.step{padding:24px}.lead{font-size:18px}.jump{gap:14px 20px}.breadcrumbs{font-size:12px}h1{font-size:40px}}
