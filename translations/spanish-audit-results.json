@@ -1,0 +1,133 @@
+{
+  "pages": 51,
+  "errors": [],
+  "numeric_terms_for_review": [
+    {
+      "page": "/es/costo-trasplante-capilar",
+      "type": "money",
+      "missing": {
+        "$149": 1,
+        "$15000": 1,
+        "$4000": 1,
+        "$50000": 1
+      },
+      "additional": {}
+    },
+    {
+      "page": "/es",
+      "type": "money",
+      "missing": {
+        "$149": 1
+      },
+      "additional": {}
+    },
+    {
+      "page": "/es/blog/best-stem-cell-hair-restoration-clinics-in-nyc",
+      "type": "money",
+      "missing": {
+        "$25000": 1,
+        "$3000": 1
+      },
+      "additional": {}
+    },
+    {
+      "page": "/es/blog/how-much-does-prp-hair-treatment-cost-in-nyc",
+      "type": "money",
+      "missing": {
+        "$1000": 3,
+        "$1500": 6,
+        "$3000": 2,
+        "$400": 2,
+        "$4500": 4,
+        "$600": 2,
+        "$700": 1,
+        "$900": 2
+      },
+      "additional": {}
+    },
+    {
+      "page": "/es/blog/stem-cell-hair-restoration-cost",
+      "type": "money",
+      "missing": {
+        "$15000": 1,
+        "$2000": 1,
+        "$20000": 1,
+        "$3000": 1,
+        "$5000": 1,
+        "$7000": 1,
+        "$8000": 2
+      },
+      "additional": {}
+    }
+  ],
+  "currency_translation_examples": [
+    {
+      "english": "$149/month",
+      "spanish": "149 dólares por mes"
+    },
+    {
+      "english": "$3,000 and $25,000",
+      "spanish": "3.000 y 25.000 dólares"
+    },
+    {
+      "english": "$395 per session",
+      "spanish": "395 dólares por período de sesiones"
+    },
+    {
+      "english": "$4,000 and $15,000",
+      "spanish": "4.000 y 15.000 dólares"
+    },
+    {
+      "english": "($2,000-$5,000 annually): Yearly booster treatments to sustain results",
+      "spanish": "(2.000 a 5.000 dólares anuales): tratamientos anuales de refuerzo para mantener los resultados"
+    },
+    {
+      "english": "($3,000-$7,000): One extraction and injection appointment",
+      "spanish": "(Entre 3.000 y 7.000 dólares de los EE.UU.): Un nombramiento para la extracción y la inyección"
+    },
+    {
+      "english": "($8,000-$15,000): Three to six treatments spaced 4-8 weeks apart",
+      "spanish": "(8.000 a 15.000 dólares): de tres a seis tratamientos separados entre 4 y 8 semanas"
+    },
+    {
+      "english": "Approvals up to $50,000",
+      "spanish": "Aprobaciones de hasta 50.000 dólares"
+    },
+    {
+      "english": "Single session: $1,000 to $1,500 in New York",
+      "spanish": "Sesión única: de 1.000 a 1.500 dólares en Nueva York"
+    },
+    {
+      "english": "The initial course: $3,000 to $4,500 for three sessions",
+      "spanish": "El curso inicial: de 3.000 a 4.500 dólares para tres sesiones"
+    },
+    {
+      "english": "Up to $50,000 approvals",
+      "spanish": "Hasta 50.000 aprobaciones"
+    },
+    {
+      "english": "procedures in NYC typically range from $8,000 to $20,000 for 2,000-3,500 grafts, providing permanent hair relocation with predictable results.",
+      "spanish": "Los procedimientos en Nueva York suelen oscilar entre 8.000 y 20.000 dólares para los injertos de 2.000 a 3.500, proporcionando una reubicación permanente del cabello con resultados predecibles."
+    },
+    {
+      "english": "A single PRP session costs $400 to $1,500 in the United States in 2026, with most patients paying $600 to $900. New York sits at the top of that spread: in major metros such as NYC, Los Angeles and Miami, clinics typically charge $1,000 to $1,500 per session, and an October 2026 price survey of New York providers found session prices from $600 to $1,450 with a median of about $1,000.",
+      "spanish": "Una sola sesión de PRP cuesta entre 400 y 1.500 dólares en los Estados Unidos en 2026, y la mayoría de los pacientes pagan entre 600 y 900 dólares. Nueva York se encuentra en la parte superior de esa extensión: en los principales metros como Nueva York, Los Ángeles y Miami, las clínicas suelen cobrar $1,000 a $1,500 por sesión, y una encuesta de precios de octubre de 2026 de los proveedores de Nueva York encontraron precios de sesión de $600 a $1,450 con una mediana de alrededor de $1,000."
+    },
+    {
+      "english": "A three-session initial course works out to roughly $3,000 to $4,500 at New York's 2026 rates of $1,000 to $1,500 per session. Nationally, initial courses of three to four sessions run $1,500 to $4,500.",
+      "spanish": "Un curso inicial de tres períodos de sesiones asciende a aproximadamente $3,000 a $4,500 a las tasas de Nueva York 2026 de $1,000 a $1,500 por sesión. A nivel nacional, los cursos iniciales de tres a cuatro sesiones cuestan entre 1.500 y 4.500 dólares."
+    },
+    {
+      "english": "For a one-session budget in New York in 2026, plan on $1,000 to $1,500 at most clinics. Providers on the lower end of the New York spread charge from $600 per session, and the median across the city's providers sits near $1,000 — so a quote under $1,000 is not unusual, and a quote near $1,500 is at the market's ceiling rather than an outlier.",
+      "spanish": "Para un presupuesto de un período de sesiones en Nueva York en 2026, planifique entre 1.000 y 1.500 dólares en la mayoría de las clínicas. Los proveedores en el extremo inferior de la tarifa de Nueva York de $600 por sesión, y la mediana de todos los proveedores de la ciudad se encuentra cerca de $1,000 — por lo que una cotización por debajo de $1,000 no es inusual, y una cotización por cerca de $1,500 está en el techo del mercado en lugar de un atípico."
+    },
+    {
+      "english": "Roughly $3,000 to $4,500 for a three-session initial course at New York rates. Nationally, courses of three to four sessions run $1,500 to $4,500.",
+      "spanish": "Aproximadamente de 3.000 a 4.500 dólares para un curso inicial de tres sesiones a precios de Nueva York. A nivel nacional, los cursos de tres a cuatro sesiones cuestan entre 1.500 y 4.500 dólares."
+    },
+    {
+      "english": "Yes. Mid-size US cities run $600 to $900 per session in 2026 and smaller markets $400 to $700, against $1,000 to $1,500 in major metros including New York. Weigh any travel against that gap honestly before chasing a lower rate.",
+      "spanish": "Sí. Las ciudades estadounidenses de tamaño mediano tienen entre 600 y 900 dólares por sesión en 2026 y mercados más pequeños entre 400 y 700 dólares, frente a entre 1.000 y 1.500 dólares en los principales metros, incluyendo Nueva York. Pesar cualquier viaje contra esa brecha honestamente antes de perseguir una tasa más baja."
+    }
+  ]
+}
