@@ -1,0 +1,21 @@
+name: Audit complete Spanish draft
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Load draft content without publishing
+        run: |
+          git fetch origin spanish/full-site-translation
+          git checkout FETCH_HEAD -- public translations
+      - name: Install HTML reader
+        run: pip install beautifulsoup4
+      - name: Audit complete page coverage, images, forms and numeric terms
+        run: python scripts/audit-full-spanish.py
