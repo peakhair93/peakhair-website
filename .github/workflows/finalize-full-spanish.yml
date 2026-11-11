@@ -27,6 +27,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin spanish/full-site-final || true
           git checkout -B spanish/full-site-final
           git add public translations
           git commit -m 'Finalize complete Spanish page translations and validate all content'
