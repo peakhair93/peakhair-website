@@ -1,0 +1,33 @@
+name: Finalize complete Spanish draft
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Load prepared translations
+        run: |
+          git fetch origin spanish/full-site-translation
+          git checkout FETCH_HEAD -- public translations
+      - name: Install HTML checker
+        run: pip install beautifulsoup4
+      - name: Finalize interactions and validate full content
+        run: |
+          python scripts/finalize-spanish.py
+          python scripts/audit-full-spanish.py
+          node --check public/assets/peak-full-spanish-runtime.js
+          node --check public/assets/peak-language.js
+      - name: Save finalized review draft
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B spanish/full-site-final
+          git add public translations
+          git commit -m 'Finalize complete Spanish page translations and validate all content'
+          git push --force-with-lease origin spanish/full-site-final
