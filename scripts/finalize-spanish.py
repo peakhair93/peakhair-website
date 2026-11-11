@@ -28,7 +28,9 @@ runtime.write_text(js)
 # Add a lightweight Spanish-only readability fix without changing any source layout.
 for f in [Path('public/es.html'),*Path('public/es').rglob('*.html')]:
  html=f.read_text()
- html=html.replace('Restauración del Cabello Pico','Peak Hair Restoration').replace('Restauración de Cabello Pico','Peak Hair Restoration')
+ html=html.replace('Restauración del Cabello Pico','Peak Hair Restoration').replace('Restauración de Cabello Pico','Peak Hair Restoration').replace('Peak Hair Restauration','Peak Hair Restoration')
+ html=re.sub(r'^html\s*(?=<html)','<!doctype html>\n',html)
+ html=html.replace('Política de nombramientos','Política de citas').replace('>Nombramientos<','>Citas<').replace('>Importe de las restituciones<','>Reembolsos<').replace('mantener inofensiva Peak Hair Restoration','mantener indemne a Peak Hair Restoration')
  # References to external publications and original trademarks remain untouched.
  html=html.replace('</head>','<style>html[lang="es"] img{max-width:100%}html[lang="es"] .es-full-nav{overflow-wrap:anywhere}html[lang="es"] .es-full-notice{font-size:12px}html[lang="es"] .es-full-notice a{display:inline-block;padding:4px 0}</style></head>')
  f.write_text(html)
