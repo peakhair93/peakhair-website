@@ -1,13 +1,16 @@
 import os,re,json,hashlib,sys
 from pathlib import Path
-from urllib.parse import urlsplit
-from bs4 import BeautifulSoup,Comment,NavigableString
+from urllib.parse import urlsplit,urljoin
+from bs4 import BeautifulSoup,Comment,NavigableString,Doctype
 import ctranslate2
 from transformers import MarianTokenizer
 ROOT=Path('public'); BASE='https://www.peakhairtransplant.com'
 MODEL='Helsinki-NLP/opus-mt-en-es'
 CACHE=Path('translations/spanish-full-cache.json');CACHE.parent.mkdir(exist_ok=True)
 cache=json.loads(CACHE.read_text()) if CACHE.exists() else {}
+if cache.get('_translation_version')!='sentence-v2':
+ cache={key:value for key,value in cache.items() if not re.search(r'(?<=[.!?])\s+(?=[A-Z])',key)}
+cache['_translation_version']='sentence-v2'
 # Keep existing Spanish addresses so published links do not break.
 slugs={'/':'/es','/fue':'/es/trasplante-capilar-fue','/sapphire-fue-hair-transplant-nyc':'/es/trasplante-capilar-sapphire-fue','/dhi-hair-transplant':'/es/trasplante-capilar-dhi','/ice-fue-hair-transplant-nyc':'/es/trasplante-capilar-ice-fue','/mega-session-fue-hair-transplant-nyc':'/es/mega-sesion-fue','/unshaven-hair-transplant-nyc':'/es/trasplante-capilar-sin-rapar','/afro-hair-transplant-nyc':'/es/trasplante-capilar-cabello-afro','/beard-transplant-nyc':'/es/trasplante-de-barba','/prp-hair-restoration':'/es/prp-capilar','/new-york-hair-transplant':'/es/trasplante-capilar-manhattan','/hair-transplant-cost-nyc':'/es/costo-trasplante-capilar','/privacy-policy':'/es/politica-de-privacidad','/patient-policies':'/es/politicas-para-pacientes','/pre-op-checklist':'/es/guia-preoperatoria','/post-op-guide':'/es/guia-posoperatoria','/istanbul-hair-transplant':'/es/trasplante-capilar-estambul','/404':'/es/404','/blog':'/es/blog'}
 def route(f):
@@ -22,7 +25,7 @@ def eligible(t):
  return bool(re.search('[A-Za-z]',t)) and not re.fullmatch(r'[\d\s\W]+',t) and not re.search(r'^(https?://|mailto:|tel:|[\w.+-]+@[\w.-]+\.[a-z]+$)',t) and not re.search(r'^240 W 37th|^New York, NY 10018|^\(917\)',t)
 def nodes(soup):
  for n in soup.find_all(string=True):
-  if isinstance(n,Comment) or n.parent.name in ['script','style','noscript','code','pre','svg','path']:continue
+  if isinstance(n,(Comment,Doctype)) or n.parent.name in ['script','style','noscript','code','pre','svg','path']:continue
   if n.find_parent(['script','style','svg','code','pre']):continue
   t=str(n).strip()
   if t and eligible(t):yield n,t
@@ -47,7 +50,7 @@ for f in files:
    t=tag.get(attr)
    if isinstance(t,str) and eligible(t):texts.add(t.strip())
  for meta in s.find_all('meta'):
-  if meta.get('name')=='description' or meta.get('property') in ['og:title','og:description','twitter:title','twitter:description']:
+  if meta.get('name') in ['description','twitter:title','twitter:description'] or meta.get('property') in ['og:title','og:description']:
    if meta.get('content'):texts.add(meta['content'].strip())
  soups.append((f,s))
 missing=sorted(texts-set(cache))
@@ -59,16 +62,11 @@ if missing:
  for text in missing:
   # Split long content at sentence boundaries rather than truncating it.
   spans=re.split(r'(?<=[.!?])\s+(?=[A-Z“\"(])',text)
-  chunks=[];part=''
+  chunks=[]
   for span in spans:
-   if len(tok.encode(span))>380:
-    words=span.split();spanparts=[' '.join(words[i:i+100]) for i in range(0,len(words),100)]
-   else:spanparts=[span]
-   for sp in spanparts:
-    candidate=(part+' '+sp).strip()
-    if part and len(tok.encode(candidate))>380:chunks.append(part);part=sp
-    else:part=candidate
-  if part:chunks.append(part)
+   if len(tok.encode(span))>300:
+    words=span.split();chunks.extend(' '.join(words[i:i+70]) for i in range(0,len(words),70))
+   else:chunks.append(span)
   pieces[text]=chunks
   for index,chunk in enumerate(chunks):jobs.append((text,index,chunk))
  outputs={}
@@ -94,6 +92,8 @@ def link(href,enroute):
  u=urlsplit(href)
  if u.scheme and (u.scheme not in ['http','https'] or u.netloc not in ['www.peakhairtransplant.com','peakhairtransplant.com']):return href
  if not u.path:return href
+ if not u.path.startswith('/'):
+  u=urlsplit(urljoin(BASE+enroute,href))
  p=u.path.removesuffix('.html').rstrip('/') or '/'
  if p.endswith('/index'):p=p[:-6] or '/'
  if p in slugs:return slugs[p]+('?' + u.query if u.query else '')+('#'+u.fragment if u.fragment else '')
@@ -110,7 +110,7 @@ for f,s in soups:
    t=tag.get(attr)
    if isinstance(t,str) and eligible(t):tag[attr]=tr(t.strip())
  for meta in s.find_all('meta'):
-  if meta.get('name')=='description' or meta.get('property') in ['og:title','og:description','twitter:title','twitter:description']:
+  if meta.get('name') in ['description','twitter:title','twitter:description'] or meta.get('property') in ['og:title','og:description']:
    if meta.get('content'):meta['content']=tr(meta['content'].strip())
  if s.html:s.html['lang']='es'
  for a in s.find_all('a',href=True):a['href']=link(a['href'],en)
@@ -120,6 +120,7 @@ for f,s in soups:
  for language,url in [('en',BASE+en),('es',BASE+es),('x-default',BASE+en)]:
   s.head.append(s.new_tag('link',rel='alternate',hreflang=language,href=url))
  for meta in s.find_all('meta',property='og:url'):meta['content']=BASE+es
+ for meta in s.find_all('meta',property='og:locale'):meta['content']='es_US'
  # Never initialize the English-only generated mobile menu on a Spanish page.
  for tag in s.find_all('script'):
   src=tag.get('src','')
