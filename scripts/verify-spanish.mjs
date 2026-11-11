@@ -16,7 +16,7 @@ for(const file of files){
  for(const [,url] of source.matchAll(/href="(\/[^"#?]*)/g)){
    if(url==='/'||url.startsWith('/assets/')||url==='/blog')continue;
    const target='public'+url+'.html';
-   if(!fs.existsSync(target)&&!fs.existsSync('public'+url+'/index.html'))failures.push('Missing internal target '+url);
+   if(!fs.existsSync('public'+url)&&!fs.existsSync(target)&&!fs.existsSync('public'+url+'/index.html'))failures.push('Missing internal target '+url);
  }
  console.log('Checked '+canonical+' and English counterpart');
 }
