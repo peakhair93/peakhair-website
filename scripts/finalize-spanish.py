@@ -19,6 +19,11 @@ if needle not in js:raise RuntimeError('Runtime injection point missing')
 js=js.replace(needle,';Object.assign(dictionary,'+json.dumps(manual,ensure_ascii=False)+');const translate=root=>',1)
 # Dynamic numeric gallery counters are not fixed text strings.
 js=js.replace("const t=node.nodeValue.trim();if(dictionary[t]", "const t=node.nodeValue.trim();if(/^\\d+ of \\d+ photos$/.test(t)){node.nodeValue=t.replace(' of ',' de ').replace(' photos',' fotos');continue;}if(dictionary[t]",1)
+# Static paragraphs are already translated; only short dynamic labels belong in browser code.
+start=js.index('const dictionary=')+len('const dictionary=')
+data,end=json.JSONDecoder().raw_decode(js[start:])
+small={key:value for key,value in data.items() if len(key)<110}
+js=js[:start]+json.dumps(small,ensure_ascii=False)+js[start+end:]
 runtime.write_text(js)
 # Add a lightweight Spanish-only readability fix without changing any source layout.
 for f in [Path('public/es.html'),*Path('public/es').rglob('*.html')]:
