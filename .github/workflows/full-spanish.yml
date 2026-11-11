@@ -1,0 +1,42 @@
+name: Prepare complete Spanish translation
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: complete-spanish-translation
+  cancel-in-progress: false
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install local translation tools
+        run: |
+          pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install transformers==4.48.3 ctranslate2==4.6.0 sentencepiece sacremoses beautifulsoup4
+      - uses: actions/cache@v4
+        id: model
+        with:
+          path: .translation-model
+          key: opus-en-es-ctranslate2-v1
+      - name: Prepare open-source English to Spanish model
+        if: steps.model.outputs.cache-hit != 'true'
+        run: ct2-transformers-converter --model Helsinki-NLP/opus-mt-en-es --output_dir .translation-model --quantization int8
+      - name: Translate full pages without shortening source content
+        run: python -u scripts/full-spanish.py
+      - name: Save translated draft for review
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B spanish/full-site-translation
+          git add public translations
+          git diff --cached --quiet || git commit -m 'Prepare complete Spanish site translation preserving page layouts'
+          git push --force-with-lease origin spanish/full-site-translation
