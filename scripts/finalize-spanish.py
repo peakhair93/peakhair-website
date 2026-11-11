@@ -25,9 +25,40 @@ data,end=json.JSONDecoder().raw_decode(js[start:])
 small={key:value for key,value in data.items() if len(key)<110}
 js=js[:start]+json.dumps(small,ensure_ascii=False)+js[start+end:]
 runtime.write_text(js)
+corrections={
+ 'Trasplante de cabello post-Op Guía':'Guía posoperatoria del trasplante capilar',
+ 'Trasplante de cabello Pre-Op Checklist':'Guía preoperatoria del trasplante capilar',
+ 'Peak Hair Restoration home':'Inicio de Peak Hair Restoration',
+ 'Contacto máximo para la programación':'Contactar con Peak para coordinar citas',
+ 'El pico coordina la programación':'Peak coordina la programación',
+ 'hasta que la limpien':'hasta recibir autorización del profesional tratante',
+ 'área del destinatario':'zona receptora',
+ 'El vaciado del cabello trasplantado':'La caída del cabello trasplantado',
+ '¿El trasplante fracasó?':'¿La caída del cabello significa que el trasplante fracasó?',
+ 'Trasplante de pelo antes de volver a crecer.':'Caída temporal del cabello trasplantado antes de que vuelva a crecer.',
+ 'obtenga el aclaramiento antes de reanudar actividades':'obtenga autorización médica antes de reanudar actividades',
+ 'No pique en las costras ni fregue la nueva línea de cabello.':'No retire las costras ni frote la nueva línea del cabello.',
+ 'Siga las instrucciones escritas de su médico en esta página.':'Las instrucciones escritas de su profesional tratante tienen prioridad sobre esta página.',
+ 'El médico que trata responde a preguntas médicas':'El profesional tratante responde a las preguntas médicas',
+ 'Mantenga cerca las instrucciones escritas de su médico que trata':'Tenga a mano las instrucciones escritas de su profesional tratante',
+ 'No deje de recetarse el tratamiento por su cuenta.':'No suspenda por su cuenta un tratamiento recetado.',
+ 'qué medicamentos y suplementos deben continuar, cambiar o mantener':'qué medicamentos y suplementos deben continuar, modificarse o suspenderse',
+ 'instrucciones personales de descarga':'instrucciones personales para el alta',
+ 'un certificado médico o instrucciones clínicas específicas de Peak':'una autorización médica ni instrucciones clínicas específicas de Peak',
+ 'no reemplaza el certificado médico':'no reemplaza la autorización médica',
+ 'Peak\'s':'Peak',
+ 'Hasta 50.000 aprobaciones':'Aprobaciones de financiación de hasta $50,000',
+ '395 dólares por período de sesiones':'$395 por sesión',
+ 'Un nombramiento para la extracción y la inyección':'Una cita para la extracción y la inyección',
+ 'período de sesiones':'sesión',
+ 'períodos de sesiones':'sesiones',
+ 'Cuestiones comunes':'Preguntas frecuentes',
+ 'Preguntas sobre el calendario':'Preguntas sobre la coordinación de citas'
+}
 # Add a lightweight Spanish-only readability fix without changing any source layout.
 for f in [Path('public/es.html'),*Path('public/es').rglob('*.html')]:
  html=f.read_text()
+ for old,new in corrections.items():html=html.replace(old,new)
  html=html.replace('Restauración del Cabello Pico','Peak Hair Restoration').replace('Restauración de Cabello Pico','Peak Hair Restoration').replace('Peak Hair Restauration','Peak Hair Restoration')
  html=re.sub(r'^html\s*(?=<html)','<!doctype html>\n',html)
  html=html.replace('Política de nombramientos','Política de citas').replace('>Nombramientos<','>Citas<').replace('>Importe de las restituciones<','>Reembolsos<').replace('mantener inofensiva Peak Hair Restoration','mantener indemne a Peak Hair Restoration')
