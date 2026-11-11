@@ -144,11 +144,16 @@ const entries = staticPages.map(([loc, file, freq, pri]) => [`${origin}${loc ===
 entries.splice(entries.length - 2, 0, [`${origin}/blog`, newestArticle, 'weekly', '0.8'], ...articles.map(a => [url(a.slug), date(a.updated_at) || date(a.published_at), 'monthly', '0.7']));
 // Preserve localized pages when rebuilding the article sitemap.
 try {
-  const spanishFiles = await readdir(path.resolve('public/es'));
   entries.push([`${origin}/es`, '', 'monthly', '0.7']);
-  for (const file of spanishFiles.filter(file => file.endsWith('.html'))) {
-    entries.push([`${origin}/es/${file.slice(0, -5)}`, '', 'monthly', '0.7']);
+  async function preserveSpanish(directory, prefix = '/es') {
+    for (const file of await readdir(directory, { withFileTypes: true })) {
+      if (file.isDirectory()) await preserveSpanish(path.join(directory, file.name), `${prefix}/${file.name}`);
+      else if (file.name.endsWith('.html') && file.name !== '404.html') {
+        entries.push([`${origin}${prefix}/${file.name.slice(0, -5)}`, '', 'monthly', '0.7']);
+      }
+    }
   }
+  await preserveSpanish(path.resolve('public/es'));
 } catch (error) { if (error.code !== 'ENOENT') throw error; }
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.map(([loc, mod, freq, pri]) => `  <url><loc>${loc}</loc>${mod ? `<lastmod>${mod}</lastmod>` : ''}<changefreq>${freq}</changefreq><priority>${pri}</priority></url>`).join('\n')}\n</urlset>\n`;
 await writeFile(path.resolve('public/sitemap.xml'), sitemap);
