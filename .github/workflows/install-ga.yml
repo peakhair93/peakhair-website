@@ -1,0 +1,25 @@
+name: Install Google Analytics tag
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: install-ga
+  cancel-in-progress: false
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Add the tag to every page
+        run: node scripts/add-ga.mjs
+      - name: Commit tagged pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public
+          git diff --cached --quiet || git commit -m 'Install Google Analytics measurement code across the website'
+          git push origin HEAD:main
