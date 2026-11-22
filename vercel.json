@@ -4,6 +4,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/cookies",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
       "source": "/treatments/stem-cell",
       "destination": "/prp-hair-restoration",
       "permanent": true
