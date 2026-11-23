@@ -1,388 +1,46 @@
 {
-  "checkedAt": "2026-11-23T17:33:05.569Z",
-  "htmlPagesChecked": 107,
-  "changedFiles": [
-    "public/unshaven-hair-transplant-nyc.html",
-    "public/eyebrow-transplant-nyc.html",
-    "scripts/ryze-convert.mjs"
+  "checkedAt": "2026-11-23T17:33:52.348Z",
+  "htmlFilesChecked": 107,
+  "indexableContentPagesChecked": 104,
+  "excludedUtilityPages": 3,
+  "changedFiles": [],
+  "spanishArticleSchemaAdded": 32,
+  "spanishPages": [
+    "public/es/blog/best-7-hair-transplant-clinics-in-new-york-city.html",
+    "public/es/blog/best-hair-restoration-clinics-for-women.html",
+    "public/es/blog/best-hair-transplant-clinics-for-advanced-hair-loss.html",
+    "public/es/blog/best-hair-transplant-clinics-for-afro-textured-hair-in-nyc.html",
+    "public/es/blog/best-hair-transplant-clinics-for-receding-hairlines.html",
+    "public/es/blog/best-hair-transplant-clinics-in-brooklyn.html",
+    "public/es/blog/best-hair-transplant-clinics-in-queens.html",
+    "public/es/blog/best-hair-transplant-clinics-in-turkey.html",
+    "public/es/blog/best-hair-transplant-surgeons-in-nyc.html",
+    "public/es/blog/best-prp-hair-treatment-clinics-in-nyc.html",
+    "public/es/blog/best-stem-cell-hair-restoration-clinics-in-nyc.html",
+    "public/es/blog/can-a-hair-transplant-fix-a-widow-s-peak.html",
+    "public/es/blog/can-hair-transplant-results-look-unnatural.html",
+    "public/es/blog/can-women-get-a-sapphire-fue-hair-transplant.html",
+    "public/es/blog/cost-in-hair-transplant.html",
+    "public/es/blog/fue-hair-transplant-nyc-guide-2026.html",
+    "public/es/blog/hair-graft-before-and-after.html",
+    "public/es/blog/hair-transplant-near-me-nyc.html",
+    "public/es/blog/hair-transplant-nyc-patient-guide-2026.html",
+    "public/es/blog/hair-transplant-options.html",
+    "public/es/blog/hair-transplant-recovery-timeline.html",
+    "public/es/blog/hair-transplant-turkey-cost-2026.html",
+    "public/es/blog/how-much-does-a-hair-transplant-cost-in-nyc.html",
+    "public/es/blog/how-much-does-prp-hair-treatment-cost-in-nyc.html",
+    "public/es/blog/how-painful-is-a-sapphire-fue-hair-transplant.html",
+    "public/es/blog/how-to-choose-a-hair-transplant-surgeon-nyc.html",
+    "public/es/blog/is-fue-hair-transplant-safe-for-afro-textured-hair.html",
+    "public/es/blog/is-sapphire-fue-worth-it-compared-to-standard-fue.html",
+    "public/es/blog/natural-hairline-hair-transplant-design.html",
+    "public/es/blog/prp-hair-treatment-nyc-guide-2026.html",
+    "public/es/blog/sapphire-fue-hair-transplant-guide.html",
+    "public/es/blog/stem-cell-hair-restoration-cost.html"
   ],
-  "spanishArticleSchemaAdded": 0,
-  "spanishPages": [],
   "sitemapUrls": 104,
-  "findings": [
-    {
-      "file": "public/404.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/404.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-7-hair-transplant-clinics-in-new-york-city.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-restoration-clinics-for-women.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-clinics-for-advanced-hair-loss.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-clinics-for-afro-textured-hair-in-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-clinics-for-receding-hairlines.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-clinics-in-brooklyn.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-clinics-in-queens.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-clinics-in-turkey.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-hair-transplant-surgeons-in-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-prp-hair-treatment-clinics-in-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/best-stem-cell-hair-restoration-clinics-in-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/can-a-hair-transplant-fix-a-widow-s-peak.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/can-hair-transplant-results-look-unnatural.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/can-women-get-a-sapphire-fue-hair-transplant.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/cost-in-hair-transplant.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/fue-hair-transplant-nyc-guide-2026.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/hair-graft-before-and-after.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/hair-transplant-near-me-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/hair-transplant-nyc-patient-guide-2026.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/hair-transplant-options.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/hair-transplant-recovery-timeline.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/hair-transplant-turkey-cost-2026.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/how-much-does-a-hair-transplant-cost-in-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/how-much-does-prp-hair-treatment-cost-in-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/how-painful-is-a-sapphire-fue-hair-transplant.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/how-to-choose-a-hair-transplant-surgeon-nyc.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/is-fue-hair-transplant-safe-for-afro-textured-hair.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/is-sapphire-fue-worth-it-compared-to-standard-fue.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/natural-hairline-hair-transplant-design.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/prp-hair-treatment-nyc-guide-2026.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/sapphire-fue-hair-transplant-guide.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog/stem-cell-hair-restoration-cost.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/blog.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/costo-trasplante-capilar.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/guia-posoperatoria.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/guia-preoperatoria.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/mega-sesion-fue.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/politica-de-privacidad.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/politicas-para-pacientes.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/prp-capilar.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-cabello-afro.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-dhi.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-estambul.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-fue.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-ice-fue.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-manhattan.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-sapphire-fue.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-capilar-sin-rapar.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es/trasplante-de-barba.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/es.html",
-      "problems": [
-        "missing_description",
-        "missing_canonical"
-      ]
-    },
-    {
-      "file": "public/google7cb1179d5d6f89f8.html",
-      "problems": [
-        "missing_title",
-        "missing_description",
-        "missing_canonical",
-        "h1_count_0"
-      ]
-    }
-  ],
-  "duplicateTitles": []
+  "findings": [],
+  "duplicateTitles": [],
+  "unresolvedLocalTargets": []
 }
