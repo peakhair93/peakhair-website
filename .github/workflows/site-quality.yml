@@ -1,0 +1,26 @@
+name: Site quality repairs
+on:
+  push:
+    branches: [ryze/site-quality-nov23]
+    paths: ['scripts/site-quality.mjs', '.github/workflows/site-quality.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check scripts/site-quality.mjs && node scripts/site-quality.mjs
+      - name: Commit verified repairs and audit results on this branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public scripts/ryze-convert.mjs scripts/site-quality-results.json
+          git diff --cached --quiet || git commit -m 'Repair sitemap, search previews and Spanish article metadata [skip ci]'
+          git push
