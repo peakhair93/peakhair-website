@@ -939,7 +939,18 @@ document.querySelectorAll('.faq button').forEach(btn=>{
   });
 });
 // Keep the selected section green after navigating within the page.
-(function(){const links=document.querySelectorAll('.nav-links>a[href^="#"]');function sync(){links.forEach(a=>a.classList.toggle('is-current',!!location.hash&&a.getAttribute('href')===location.hash));}window.addEventListener('hashchange',sync);sync();})();
+(function(){
+  const nav=document.querySelector('.nav-links');
+  const links=document.querySelectorAll('.nav-links>a[href^="#"]');
+  const treatments=nav&&nav.querySelector('.nav-treatment');
+  function closeTreatments(){if(treatments)treatments.open=false;}
+  function sync(){links.forEach(a=>a.classList.toggle('is-current',!!location.hash&&a.getAttribute('href')===location.hash));}
+  if(nav)nav.addEventListener('click',function(event){if(event.target.closest('a'))closeTreatments();});
+  document.addEventListener('click',function(event){if(treatments&&!treatments.contains(event.target))closeTreatments();});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape')closeTreatments();});
+  window.addEventListener('hashchange',function(){closeTreatments();sync();});
+  sync();
+})();
 // Result filter pills (visual only in mockup)
 document.querySelectorAll('.filters button').forEach(b=>{
   b.addEventListener('click',()=>{
