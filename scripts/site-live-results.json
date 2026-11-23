@@ -1,0 +1,7 @@
+{
+  "checkedAt": "2026-11-23T17:35:47.329Z",
+  "urlsChecked": 104,
+  "passed": 104,
+  "failed": [],
+  "scope": "HTTP status, exact title/description/canonical match, and Spanish article author/publication date; not external links, visual/clinical review or submitted form delivery."
+}
