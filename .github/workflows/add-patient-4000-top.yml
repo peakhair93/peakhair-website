@@ -1,0 +1,37 @@
+name: Prepare patient 4000 top-view gallery photo
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install Pillow
+      - name: Crop original top-view photos without retouching
+        env:
+          IMAGE_URL: 'https://c412becc37630f5699bcebcf37ceb143.r2.cloudflarestorage.com/seo-audit-private/paid-ads-chat-files/13cddb2f-38ad-4c6c-81b4-b2cf534cdfd9/08102275-2ce9-4fbc-9cbe-47f8f06a82c8/507aec0c-37f6-44ac-9f3e-fc1cc2a89e7a/d5e56840-6562-4ea0-89f9-3c1244717b75.png?X-Amz-Expires=604800&X-Amz-Date=20261123T175158Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=95e3a6e2084d13ff3f0c489a4119c5c2%2F20261123%2Fauto%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=8e28fb9a679446e415337840a24c784dc45612a980f7add27603a3d56d452be1'
+        run: |
+          python - <<'PY'
+          import os,io,urllib.request
+          from PIL import Image,ImageOps
+          image=Image.open(io.BytesIO(urllib.request.urlopen(os.environ['IMAGE_URL']).read())).convert('RGB')
+          w,h=image.size
+          def crop(box):
+              return image.crop(tuple(round(v*s) for v,s in zip(box,(w,h,w,h))))
+          before=crop((40/777,321/1024,380/777,796/1024))
+          after=crop((398/777,321/1024,738/777,796/1024))
+          canvas=Image.new('RGB',(760,570))
+          canvas.paste(ImageOps.fit(before,(380,570),centering=(.5,0)),(0,0))
+          canvas.paste(ImageOps.fit(after,(380,570),centering=(.5,0)),(380,0))
+          canvas.save('public/assets/peak-result-4000-7months-top-gallery.webp','WEBP',quality=94)
+          assert Image.open('public/assets/peak-result-4000-7months-top-gallery.webp').size==(760,570)
+          PY
+      - name: Save gallery asset
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/assets/peak-result-4000-7months-top-gallery.webp
+          git diff --cached --quiet || git commit -m 'Add original top-view 4000 graft seven-month patient gallery photo'
+          git push
