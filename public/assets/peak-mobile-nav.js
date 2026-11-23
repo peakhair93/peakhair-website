@@ -7,10 +7,37 @@
   const desktopNav = row.querySelector('nav');
   if (!desktopNav) return;
   desktopNav.classList.add('peak-desktop-nav');
+  function closeDesktopTreatments() {
+    desktopNav.querySelectorAll('details[open]').forEach(function (menu) {
+      menu.open = false;
+      const summary = menu.querySelector('summary');
+      if (summary && document.activeElement === summary) summary.blur();
+    });
+  }
+  // Capture selections before any other navigation handler can stop bubbling.
+  document.addEventListener('pointerdown', function (event) {
+    const menu = event.target.closest('details');
+    if (!menu || !desktopNav.contains(menu) || event.target.closest('a')) closeDesktopTreatments();
+  }, true);
+  document.addEventListener('click', function (event) {
+    if (event.target.closest('a')) closeDesktopTreatments();
+  }, true);
+  desktopNav.addEventListener('focusout', function () {
+    setTimeout(function () {
+      const focused = document.activeElement;
+      desktopNav.querySelectorAll('details[open]').forEach(function (menu) {
+        if (!menu.contains(focused)) menu.open = false;
+      });
+    }, 0);
+  });
+  window.addEventListener('pageshow', closeDesktopTreatments);
+  window.addEventListener('pagehide', closeDesktopTreatments);
+  window.addEventListener('hashchange', closeDesktopTreatments);
   header.classList.add('peak-phone-header');
   const style = document.createElement('style');
   style.textContent = `
 .peak-phone-toggle,.peak-phone-nav{display:none}
+.peak-desktop-nav details:not([open])>.nav-treatment-menu{display:none!important}
 @media(max-width:600px){.peak-phone-header .nav-cta{display:none!important}}
 @media(max-width:1120px){
   header.peak-phone-header{z-index:100;overflow:visible}
@@ -72,7 +99,10 @@
   });
   nav.addEventListener('click', function (event) {
     if (event.target.closest('a')) setOpen(false);
-  });
+  }, true);
+  window.addEventListener('hashchange', function () { setOpen(false); });
+  window.addEventListener('pageshow', function () { setOpen(false); });
+  window.addEventListener('pagehide', function () { setOpen(false); });
   document.addEventListener('click', function (event) {
     if (!header.contains(event.target)) setOpen(false);
   });
