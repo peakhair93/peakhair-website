@@ -1,0 +1,37 @@
+name: Prepare 4000 graft seven-month patient C
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install Pillow
+      - name: Crop original patient photos without retouching
+        env:
+          IMAGE_URL: 'https://c412becc37630f5699bcebcf37ceb143.r2.cloudflarestorage.com/seo-audit-private/paid-ads-chat-files/13cddb2f-38ad-4c6c-81b4-b2cf534cdfd9/08102275-2ce9-4fbc-9cbe-47f8f06a82c8/507aec0c-37f6-44ac-9f3e-fc1cc2a89e7a/f51b29da-42c6-4419-8219-4c534c38f2bf.png?X-Amz-Expires=604800&X-Amz-Date=20261123T181218Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=95e3a6e2084d13ff3f0c489a4119c5c2%2F20261123%2Fauto%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=d440f3810e2facfe2d79e04f707ce2810bdb3ea518d5447e91462df063962f5f'
+        run: |
+          python - <<'PY'
+          import os,io,urllib.request
+          from PIL import Image,ImageOps
+          im=Image.open(io.BytesIO(urllib.request.urlopen(os.environ['IMAGE_URL']).read())).convert('RGB')
+          w,h=im.size
+          def panel(box):
+              return im.crop(tuple(round(v*s) for v,s in zip(box,(w,h,w,h))))
+          before=panel((24/576,420/1024,280/576,783/1024))
+          after=panel((296/576,420/1024,552/576,783/1024))
+          canvas=Image.new('RGB',(760,570))
+          canvas.paste(ImageOps.fit(before,(380,570),centering=(.5,0)),(0,0))
+          canvas.paste(ImageOps.fit(after,(380,570),centering=(.5,0)),(380,0))
+          canvas.save('public/assets/peak-result-4000-7months-patient3-gallery.webp','WEBP',quality=94)
+          assert Image.open('public/assets/peak-result-4000-7months-patient3-gallery.webp').size==(760,570)
+          PY
+      - name: Save gallery asset
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/assets/peak-result-4000-7months-patient3-gallery.webp
+          git diff --cached --quiet || git commit -m 'Add original 4000 graft seven-month patient C comparison'
+          git push
