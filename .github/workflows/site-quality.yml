@@ -2,7 +2,7 @@ name: Site quality repairs
 on:
   push:
     branches: [ryze/site-quality-nov23]
-    paths: ['scripts/site-quality.mjs', '.github/workflows/site-quality.yml']
+    paths: ['scripts/site-quality*.mjs', '.github/workflows/site-quality.yml']
   workflow_dispatch:
 permissions:
   contents: write
@@ -17,10 +17,11 @@ jobs:
         with:
           node-version: '22'
       - run: node --check scripts/site-quality.mjs && node scripts/site-quality.mjs
+      - run: node scripts/site-quality-safety.mjs
       - name: Commit verified repairs and audit results on this branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public scripts/ryze-convert.mjs scripts/site-quality-results.json
-          git diff --cached --quiet || git commit -m 'Repair sitemap, search previews and Spanish article metadata [skip ci]'
+          git add public scripts/ryze-convert.mjs scripts/site-quality-results.json scripts/site-quality-safety.json
+          git diff --cached --quiet || git commit -m 'Verify sitemap, search previews and Spanish article metadata [skip ci]'
           git push
