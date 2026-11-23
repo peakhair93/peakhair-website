@@ -129,7 +129,10 @@ await writeFile(path.join(target, 'index.html'), page('Hair Restoration Articles
 // Sitemap: static pages + every published article, so new Ryze posts are always listed.
 const staticPages = [
   ['/', 'index.html', 'weekly', '1.0'], ['/fue', 'fue.html', 'monthly', '0.9'], ['/dhi-hair-transplant', 'dhi-hair-transplant.html', 'monthly', '0.9'],
-  ['/prp-hair-restoration', 'prp-hair-restoration.html', 'monthly', '0.9'], ['/stem-cell-hair-therapy', 'stem-cell-hair-therapy.html', 'monthly', '0.8'],
+  ['/prp-hair-restoration', 'prp-hair-restoration.html', 'monthly', '0.9'],
+  ['/mega-session-fue-hair-transplant-nyc', 'mega-session-fue-hair-transplant-nyc.html', 'monthly', '0.8'],
+  ['/ice-fue-hair-transplant-nyc', 'ice-fue-hair-transplant-nyc.html', 'monthly', '0.8'],
+  ['/unshaven-hair-transplant-nyc', 'unshaven-hair-transplant-nyc.html', 'monthly', '0.8'],
   ['/new-york-hair-transplant', 'new-york-hair-transplant.html', 'monthly', '0.9'], ['/istanbul-hair-transplant', 'istanbul-hair-transplant.html', 'monthly', '0.9'],
   ['/sapphire-fue-hair-transplant-nyc', 'sapphire-fue-hair-transplant-nyc.html', 'monthly', '0.9'], ['/hair-transplant-cost-nyc', 'hair-transplant-cost-nyc.html', 'monthly', '0.9'],
   ['/eyebrow-transplant-nyc', 'eyebrow-transplant-nyc.html', 'monthly', '0.8'],
