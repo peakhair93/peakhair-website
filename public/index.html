@@ -332,6 +332,17 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
 .btn-cream:hover,.btn-cream:focus-visible,.btn-cream:active,.btn-outline-light:hover,.btn-outline-light:focus-visible,.btn-outline-light:active{background:var(--forest);color:var(--paper);border-color:var(--forest)}.btn-forest:focus-visible,.btn-forest:active{background:var(--forest-deep);color:var(--paper)}.cards .card:not(.featured):hover,.cards .card:not(.featured):focus-visible{background:#315b43}.cards .card.featured:hover,.cards .card.featured:focus-visible{outline-color:var(--forest);box-shadow:0 0 0 3px var(--forest)}.foot-grid a:hover,.foot-grid a:focus-visible{color:var(--forest);text-decoration:underline;text-underline-offset:3px}.social-links a:hover,.social-links a:focus-visible{color:var(--paper);text-decoration:none}.quote:hover,.quote:focus-visible{border-color:var(--forest)}
 @media(max-width:1120px){.nav-links{align-items:stretch}.nav-links>a{padding:12px}.nav-treatment>summary{padding:8px 12px}.nav-treatment-menu a{border-radius:9px}}
 .why-card-copy p a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+/* Dedicated patient gallery: all comparisons visible, original 4:3 format preserved. */
+.before-after-section{scroll-margin-top:100px}
+#before-after{scroll-margin-top:110px}
+.before-after-intro{max-width:680px;margin-top:18px;color:var(--sage);font-size:16px;line-height:1.7}
+.before-after-section .results-head{margin-bottom:32px}
+.before-after-section .carousel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;overflow:visible;scroll-snap-type:none;padding-bottom:0}
+.before-after-section .ba-card{min-width:0;width:100%}
+.before-after-section .cap{flex-wrap:wrap;gap:6px;min-height:48px;text-align:center}
+.before-after-section .sample-note{text-align:left;margin-top:24px}
+@media(max-width:960px){.before-after-section .carousel{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+@media(max-width:600px){.before-after-section .carousel{grid-template-columns:minmax(0,1fr);gap:20px}}
 </style>
 <script src="https://px.get-ryze.ai/px.js?key=rz_pk_2611c15723a78b835e45129619f53927" defer></script>
 <script src="/assets/peak-mobile-nav.js?v=20261123-close" defer></script>
@@ -348,7 +359,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
     <nav class="nav-links" id="primary-nav">
       <details class="nav-treatment"><summary>Treatments</summary><div class="nav-treatment-menu"><a href="/fue">FUE Techniques</a><a href="/sapphire-fue-hair-transplant-nyc">Sapphire FUE in NYC</a><a href="/dhi-hair-transplant">DHI Implantation</a><a href="/prp-hair-restoration">PRP Packages</a><a href="/beard-transplant-nyc">Beard Transplant</a><a href="/eyebrow-transplant-nyc">Eyebrow Transplant</a><a href="/afro-hair-transplant-nyc">Afro-Textured Hair</a><a href="/hair-transplant-cost-nyc">Cost &amp; Financing</a></div></details>
       <a href="#about">About Us</a>
-      <a href="#results">Results</a>
+      <a href="#results">Before &amp; After</a>
       <a href="#process">How It Works</a>
       <a href="#locations">Locations</a>
       <a href="#financing">Financing</a>
@@ -520,26 +531,17 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
   </div>
 </section>
 
-<section class="section" id="results">
+<section class="section before-after-section" id="results" aria-labelledby="before-after">
   <div class="container">
     <div class="results-head">
       <div>
-        <div class="eyebrow">Results</div>
-        <h2>Real patients. <em>Real</em> regrowth.</h2>
+        <div class="eyebrow">Patient results</div>
+        <h2 id="before-after">Before <em>&amp;</em> After</h2>
+        <p class="before-after-intro">Explore our hair and beard restoration comparisons, with each patient's available graft count and progress timeline shown below. Individual results may vary.</p>
       </div>
-      <div class="filters">
-        <button class="active">All</button>
-        <button>Sapphire FUE</button>
-        <button>PRP</button>
-      </div>
+
     </div>
-    <div class="carousel-head">
-      <h3>Browse patient results</h3>
-      <div class="car-nav">
-        <button id="carPrev" aria-label="Previous results">◂</button>
-        <button id="carNext" aria-label="Next results">▸</button>
-      </div>
-    </div>
+
     <div class="carousel" id="carousel">
       <div class="ba-card">
         <div class="pair"><img src="assets/peak-result-4000-7months-patient3-gallery.webp" width="760" height="570" loading="lazy" alt="Peak patient before hair restoration with 4,000 grafts and after seven months. Individual results may vary."><span class="l-b">Before</span><span class="l-a">After</span></div>
@@ -646,7 +648,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <div class="cap"><b>Hair transplant · 5 months</b></div>
       </div>
     </div>
-    <div class="sample-note">Scroll or use the arrows to browse more results</div>
+    <div class="sample-note">Actual patient photographs. Progress timelines and outcomes differ for every patient.</div>
   </div>
 </section>
 
@@ -897,7 +899,7 @@ footer{padding:70px 0 36px;color:var(--sage);font-size:14px}
         <p style="margin-top:14px;max-width:280px">Explore hair restoration in Istanbul and New York. Miami coming soon.</p>
       </div>
       <div><h4>Treatments</h4><a href="/fue">FUE Techniques</a><a href="/dhi-hair-transplant">DHI Hair Implantation</a><a href="#treatments">Sapphire FUE</a><a href="/prp-hair-restoration">PRP Packages</a></div>
-      <div><h4>Clinic</h4><a href="#about">About Us</a><a href="#results">Results</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#financing">Financing</a><a href="#faq">FAQ</a><a href="/pre-op-checklist">Pre-Op Checklist</a><a href="/post-op-guide">Post-Op Guide</a><a href="/blog">Blog</a></div>
+      <div><h4>Clinic</h4><a href="#about">About Us</a><a href="#results">Before &amp; After</a><a href="#process">How It Works</a><a href="#locations">Locations</a><a href="#financing">Financing</a><a href="#faq">FAQ</a><a href="/pre-op-checklist">Pre-Op Checklist</a><a href="/post-op-guide">Post-Op Guide</a><a href="/blog">Blog</a></div>
       <div><h4>Contact</h4><a href="tel:+19175322001">(917) 532-2001</a><a href="mailto:info@peakhairtransplant.com">info@peakhairtransplant.com</a><a href="#contact">Book a Consultation</a><a href="https://wa.me/19172663038" target="_blank" rel="noopener">WhatsApp</a><h4 style="margin-top:22px">Follow Peak</h4><div class="social-links"><a href="https://www.instagram.com/peak.hairrestoration/" target="_blank" rel="noopener noreferrer" aria-label="Peak Hair Restoration on Instagram">Instagram ↗</a><a href="https://www.facebook.com/61578187108076/" target="_blank" rel="noopener noreferrer" aria-label="Peak Hair Transplant on Facebook">Facebook ↗</a><a href="https://www.linkedin.com/company/peakhairrestoration" target="_blank" rel="noopener noreferrer" aria-label="Peak Hair Restoration on LinkedIn">LinkedIn ↗</a><a href="https://www.youtube.com/@peakhairusa" target="_blank" rel="noopener noreferrer" aria-label="Peak Hair Transplant on YouTube">YouTube ↗</a></div></div>
     </div>
     <div class="foot-bottom">
@@ -988,7 +990,7 @@ document.querySelectorAll('.filters button').forEach(b=>{
 // Before/After carousel arrows
 (function(){
   const c=document.getElementById('carousel');
-  if(!c)return;
+  if(!c||!document.getElementById('carNext')||!document.getElementById('carPrev'))return;
   const step=()=>{const card=c.querySelector('.ba-card');return card?card.offsetWidth+14:250};
   document.getElementById('carNext').addEventListener('click',()=>c.scrollBy({left:step()*2,behavior:'smooth'}));
   document.getElementById('carPrev').addEventListener('click',()=>c.scrollBy({left:-step()*2,behavior:'smooth'}));
