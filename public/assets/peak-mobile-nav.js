@@ -22,14 +22,9 @@
   document.addEventListener('click', function (event) {
     if (event.target.closest('a')) setTimeout(closeDesktopTreatments, 0);
   }, true);
-  desktopNav.addEventListener('focusout', function () {
-    setTimeout(function () {
-      const focused = document.activeElement;
-      desktopNav.querySelectorAll('details[open]').forEach(function (menu) {
-        if (!menu.contains(focused)) menu.open = false;
-      });
-    }, 0);
-  });
+  // Do not close on focusout: touch/Safari may focus the page body before
+  // dispatching a link click, which would hide the link before activation.
+  // Outside pointer presses, completed clicks, Escape and navigation close it.
   window.addEventListener('pageshow', closeDesktopTreatments);
   window.addEventListener('pagehide', closeDesktopTreatments);
   window.addEventListener('hashchange', closeDesktopTreatments);
