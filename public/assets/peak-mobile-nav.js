@@ -7,7 +7,6 @@
   const desktopNav = row.querySelector('nav');
   if (!desktopNav) return;
   desktopNav.classList.add('peak-desktop-nav');
-  desktopNav.querySelectorAll('.nav-treatment').forEach(function (menu) { menu.remove(); });
   function closeDesktopTreatments() {
     desktopNav.querySelectorAll('details[open]').forEach(function (menu) {
       menu.open = false;
@@ -72,7 +71,6 @@
   nav.className = 'peak-phone-nav';
   nav.setAttribute('aria-label', 'Mobile main navigation');
   nav.innerHTML = '<a href="/">Home</a><div class="peak-treatment-group"><button type="button" class="peak-treatment-toggle" aria-expanded="false" aria-controls="peak-treatment-links">Treatments</button><div class="peak-treatment-links" id="peak-treatment-links" hidden><a href="/fue">FUE Techniques</a><a href="/sapphire-fue-hair-transplant-nyc">Sapphire FUE in NYC</a><a href="/dhi-hair-transplant">DHI Implantation</a><a href="/prp-hair-restoration">PRP Packages</a><a href="/beard-transplant-nyc">Beard Transplant</a><a href="/eyebrow-transplant-nyc">Eyebrow Transplant</a><a href="/afro-hair-transplant-nyc">Afro-Textured Hair</a><a href="/hair-transplant-cost-nyc">Cost &amp; Financing</a></div></div><a href="/#about">About Us</a><a href="/#results">Before &amp; After</a><a href="/#process">How It Works</a><a href="/#locations">Locations</a><a href="/new-york-hair-transplant">New York Clinic</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a><a class="peak-phone-consult" href="/#contact">Free Consultation</a>';
-  nav.querySelectorAll('.peak-treatment-group').forEach(function (group) { group.remove(); });
   header.appendChild(nav);
   const currentPath = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   nav.querySelectorAll('a').forEach(function (link) {
