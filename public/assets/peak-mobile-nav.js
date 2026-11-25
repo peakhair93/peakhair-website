@@ -17,10 +17,10 @@
   // Capture selections before any other navigation handler can stop bubbling.
   document.addEventListener('pointerdown', function (event) {
     const menu = event.target.closest('details');
-    if (!menu || !desktopNav.contains(menu) || event.target.closest('a')) closeDesktopTreatments();
+    if (!menu || !desktopNav.contains(menu)) closeDesktopTreatments();
   }, true);
   document.addEventListener('click', function (event) {
-    if (event.target.closest('a')) closeDesktopTreatments();
+    if (event.target.closest('a')) setTimeout(closeDesktopTreatments, 0);
   }, true);
   desktopNav.addEventListener('focusout', function () {
     setTimeout(function () {
@@ -98,7 +98,7 @@
     setTreatmentsOpen(treatmentButton.getAttribute('aria-expanded') !== 'true');
   });
   nav.addEventListener('click', function (event) {
-    if (event.target.closest('a')) setOpen(false);
+    if (event.target.closest('a')) setTimeout(function () { setOpen(false); }, 0);
   }, true);
   window.addEventListener('hashchange', function () { setOpen(false); });
   window.addEventListener('pageshow', function () { setOpen(false); });
