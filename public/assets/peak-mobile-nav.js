@@ -113,3 +113,38 @@
   if (mobile.addEventListener) mobile.addEventListener('change', reset);
   else mobile.addListener(reset);
 })();
+
+(function () {
+  if (document.getElementById('peak-quick-contact')) return;
+  const style = document.createElement('style');
+  style.textContent = `
+#peak-quick-contact{position:fixed;right:20px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:990;max-width:calc(100vw - 24px);padding:10px;background:#faf7ef;color:#103e34;border:1px solid #d9d1bc;border-radius:14px;box-shadow:0 6px 28px #103e3426;font-family:Inter,Arial,sans-serif}
+#peak-quick-contact .peak-qc-actions{display:flex;gap:8px;align-items:center}
+#peak-quick-contact a{display:flex;gap:8px;align-items:center;justify-content:center;min-height:46px;padding:8px 12px;border:1px solid #b8b6a8;border-radius:8px;text-decoration:none;color:#103e34;background:#fffdf8;font-size:13px;line-height:1.2;font-weight:600}
+#peak-quick-contact a:hover,#peak-quick-contact a:focus-visible{background:#e9eee7;outline:2px solid #b99a55;outline-offset:2px}
+#peak-quick-contact svg{width:18px;height:18px;flex-shrink:0}
+#peak-quick-contact small{display:block;font-size:10px;font-weight:400;margin-top:3px}
+#peak-quick-contact p{margin:7px 0 0;font-size:11px;line-height:1.4;color:#555e56}
+#peak-quick-contact button{border:0;background:transparent;color:#103e34;cursor:pointer;min-width:36px;min-height:44px;font-size:20px;padding:4px}
+#peak-quick-contact.peak-qc-minimized .peak-qc-actions,#peak-quick-contact.peak-qc-minimized p{display:none}
+#peak-quick-contact .peak-qc-restore{display:none;font:600 13px Inter,Arial,sans-serif;padding:4px 10px}
+#peak-quick-contact.peak-qc-minimized .peak-qc-restore{display:block}
+@media(max-width:600px){#peak-quick-contact{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:8px}#peak-quick-contact a{padding:7px 10px;font-size:12px}}
+@media print{#peak-quick-contact{display:none}}
+`;
+  document.head.appendChild(style);
+  const box = document.createElement('aside');
+  box.id = 'peak-quick-contact';
+  box.setAttribute('aria-label', 'Quick contact');
+  const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8 9 9 0 0 1-3.5-.7L4 20l1.2-4.5a9 9 0 0 1-.7-3.5 8 8 0 0 1 8-8A8 8 0 0 1 20 11.5Z"/><path d="M8 10h8M8 14h6"/></svg>';
+  box.innerHTML = '<div class="peak-qc-actions"><a href="https://wa.me/19175322001" target="_blank" rel="noopener" aria-label="WhatsApp Peak at +1 917-532-2001">'+icon+'<span>WhatsApp</span></a><a href="sms:+19175322001" aria-label="Message Peak at +1 917-532-2001 by iMessage or SMS">'+icon+'<span>Message us<small>iMessage / SMS</small></span></a><button type="button" class="peak-qc-hide" aria-label="Minimise quick contact">⌄</button></div><p>For appointments and general questions.</p><button type="button" class="peak-qc-restore" aria-label="Open WhatsApp and text-message contact options">Contact us</button>';
+  document.body.appendChild(box);
+  box.querySelector('.peak-qc-hide').addEventListener('click', function () {
+    box.classList.add('peak-qc-minimized');
+    box.querySelector('.peak-qc-restore').focus();
+  });
+  box.querySelector('.peak-qc-restore').addEventListener('click', function () {
+    box.classList.remove('peak-qc-minimized');
+    box.querySelector('a').focus();
+  });
+})();
